@@ -5,7 +5,6 @@
 const sortArrayByParity = function(A) {
   const even = A.filter(x => x % 2 === 0);
   const odd = A.filter(x => x % 2 !== 0);
-
   return [...even, ...odd];
 };
 
