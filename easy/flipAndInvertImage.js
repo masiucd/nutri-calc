@@ -2,13 +2,32 @@
  * @param {number[][]} A
  * @return {number[][]}
  */
-const flipAndInvertImage = function(A) {
+const flipAndInvertImageX = function(A) {
   const flipped = A.map(x => {
     const reversedInts = x.reverse();
     return reversedInts.map(z => (z === 1 ? (z = 0) : (z = 1)));
   });
   return flipped;
 };
+
+/**
+ * @param {number[][]} A
+ * @return {number[][]}
+ */
+function flipAndInvertImage(A) {
+  const reversed = A.map(x => x.reverse());
+
+  for (let i = 0; i < reversed.length; i += 1) {
+    for (let j = 0; j < reversed.length; j += 1) {
+      if (reversed[i][j] === 1) {
+        reversed[i][j] = 0;
+      } else {
+        reversed[i][j] = 1;
+      }
+    }
+  }
+  return reversed;
+}
 
 console.log(
   flipAndInvertImage([
@@ -17,6 +36,7 @@ console.log(
     [0, 0, 0],
   ])
 );
+
 // [[1,0,0],[0,1,0],[1,1,1]]
 
 // Given a binary matrix A, we want to flip the image horizontally, then invert it, and return the resulting image.
