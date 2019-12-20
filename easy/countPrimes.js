@@ -16,24 +16,17 @@ const isPrime = n => {
 
 const countPrimes = function(n) {
   if (n < 2) return 0;
-  const nums = [...Array(n).keys()];
+
+  const numbers = [...Array(n).keys()];
+
   for (let i = 2; i * i < n; i += 1) {
-    if (nums[i] !== 'Not a prime') {
+    if (numbers[i]) {
       for (let j = i * i; j < n; j += i) {
-        nums[j] = 'Nope';
+        numbers[j] = 1;
       }
     }
   }
-
-  const primes = [];
-
-  for (let i = 0; i < nums.length; i += 1) {
-    if (nums[i] > 1) {
-      primes.push(nums[i]);
-    }
-  }
-
-  return primes.length;
+  return numbers.filter(num => num > 1).length;
 };
 
 console.log(countPrimes(10));
