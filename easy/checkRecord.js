@@ -22,7 +22,6 @@ const checkRecordX = function(s) {
  * @return {boolean}
  */
 const checkRecord = function(s) {
-  let countL = 0;
   let aBool = false;
   let lBool = false;
   let countA = 0;
