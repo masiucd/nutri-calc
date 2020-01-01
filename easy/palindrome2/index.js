@@ -24,7 +24,6 @@ const validPalindrome = function(s) {
 
   while (start < end) {
     if (s[start] !== s[end]) {
-      console.log(valid(s.slice(start, end)));
       return valid(s.slice(start, end)) || valid(s.slice(start + 1, end + 1));
     }
     start += 1;
