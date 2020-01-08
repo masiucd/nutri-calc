@@ -3,7 +3,7 @@
  * @param {string[]} words
  * @return {string}
  */
-const longestWord = function(words) {
+const longestWordx = function(words) {
   let mySet = new Set();
   let sortedWords = words.sort();
   let longest = '';
@@ -18,9 +18,33 @@ const longestWord = function(words) {
   return longest;
 };
 
-// const x1 = ['w', 'wo', 'wor', 'worl', 'world']; // world
+/**
+ * @param {string[]} words
+ * @return {string}
+ */
+const longestWord = function(words) {
+  let longest = '';
+
+  let newArr = words
+    .filter((x, i) => {
+      let a = x[i] === x[i + 1];
+
+      return a;
+    })
+    .sort();
+
+  for (let w of newArr) {
+    if (longest.length < w.length) {
+      longest = w;
+    }
+  }
+  console.log(newArr);
+  return longest;
+};
+
+const x1 = ['w', 'wo', 'wor', 'worl', 'world']; // world
 const x2 = ['a', 'banana', 'app', 'appl', 'ap', 'apply', 'apple']; // apple
-// console.log(longestWord(x1));
+console.log(longestWord(x1));
 console.log(longestWord(x2));
 
 // The word "world" can be built one character at a time by "w", "wo", "wor", and "worl".
