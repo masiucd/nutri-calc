@@ -13,7 +13,7 @@ const isHappy = function(n) {
     .reduce((a, b) => a + b, 0);
 
   set.add(x);
-  console.log(set);
+  // console.log(set);
   // if (set.has(x)) return false;
   return isHappy(x);
 };
