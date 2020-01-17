@@ -3,6 +3,10 @@ function ListNode(val) {
   this.next = null;
 }
 
+function LinkedList(){
+  
+}
+
 /**
  * @param {ListNode} head
  * @return {boolean}
