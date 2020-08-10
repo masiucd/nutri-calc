@@ -3,7 +3,7 @@
  <img width=200px height=200px src="https://cdn.svgporn.com/logos/graphql.svg" alt="Graphql logo"></a>
 </p>
 
-<h3 align="center">graphql_api</h3>
+<h3 align="center">Custom Graphql Api</h3>
 
 <div align="center">
 
@@ -16,7 +16,10 @@
 
 ---
 
-<p align="center"> Few lines describing your project.
+<p align="center">
+  Application using Apollo server for creating a graphql server.
+  all from different queries mutations and even subscriptions.
+  How graphql works and how you can easily implement your own graphql server and use it on your front end.
 
     <br>
 
@@ -26,17 +29,26 @@
 
 * [About](#about)
 * [Getting Started](#getting_started)
-* [Deployment](#deployment)
+
+<!-- * [Deployment](#deployment) -->
+
 * [Usage](#usage)
 * [Built Using](#built_using)
-* [TODO](../TODO.md)
+
+<!-- * [TODO](../TODO.md) -->
+
 * [Contributing](../CONTRIBUTING.md)
 * [Authors](#authors)
-* [Acknowledgments](#acknowledgement)
+
+<!-- * [Acknowledgments](#acknowledgement) -->
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+Application using Apollo server for creating a graphql server.
+  all from different queries mutations and even subscriptions.
+  How graphql works and how you can easily implement your own graphql server and use it on your front end.
+
+  I will create a Muay thai fighters database , as a Muay thai fan I am 🥊!
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
@@ -47,70 +59,51 @@ These instructions will get you a copy of the project up and running on your loc
 What things you need to install the software and how to install them.
 
 ``` 
-Give examples
+node >= 8.0
 ```
 
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running.
 
-Say what the step will be
+``` bash
+  git clone <project URL>
 
-``` 
-Give the example
+  cd into <Project>
+
+  npm/yarn install
+
 ```
 
-And repeat
+You should now see in your console
 
-``` 
-until finished
+``` js
+ `🚀  Server ready at http://localhost:4000/`
 ```
 
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-``` 
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-``` 
-Give an example
-```
-
-## 🎈 Usage <a name="usage"></a>
+<!-- ## 🎈 Usage <a name="usage"></a>
 
 Add notes about how to use the system.
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
-Add additional notes about how to deploy this on a live system.
+Add additional notes about how to deploy this on a live system. -->
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
 * [MongoDB](https://www.mongodb.com/) - Database
 * [Express](https://expressjs.com/) - Server Framework
-* [VueJs](https://vuejs.org/) - Web Framework
+* [Apollo](https://www.apollographql.com/) - Graphql Framework
 * [NodeJs](https://nodejs.org/en/) - Server Environment
 
 ## ✍️ Authors <a name = "authors"></a>
 
 * [@masiuciszek](https://github.com/masiuciszek) - Idea & Initial work
 
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
+<!-- See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
 
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
 * Hat tip to anyone whose code was used
 * Inspiration
-* References
+* References -->
