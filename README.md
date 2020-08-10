@@ -1,15 +1,15 @@
 <p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://cdn.svgporn.com/logos/graphql.svg" alt="Graphql logo"></a>
+  <a href="https://www.marcellable.com" rel="noopener">
+ <img width=200px height=200px src="https://cdn0.iconfinder.com/data/icons/pokemon-go-vol-1/135/_fight-256.png" alt="Graphql logo"></a>
 </p>
 
 <h3 align="center">Custom Graphql Api</h3>
 
 <div align="center">
 
-[![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
+[![Status](https://img.shields.io/badge/status-active-success.svg)](https://github.com/masiuciszek/Muay-thai-api)
+[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/masiuciszek/Muay-thai-api/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/masiuciszek/Muay-thai-api/pulls)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>

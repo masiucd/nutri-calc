@@ -1,24 +1,16 @@
 import { ApolloServer, gql } from "apollo-server";
 
-const ultrasData = [
+const fightersData = [
   {
-    name: "Zyleta",
-    team: "Legi warszawa",
-    rating: 5,
-    status: "VERY_AGGRESSIVE",
-    leader: { name: "Staruch", age: 34, timeOfLeader: "12 years" },
-  },
-  {
-    name: "Anglarna",
-    team: "IFK GBG",
-    rating: 3,
-  },
-  {
-    name: "Juve",
-    team: "Drugi",
-    rating: 4,
+    name: "Yodsanaklai",
+    gym: "Fairtex",
+    skills: ["Left kick", "Left side", "strong"],
+    age: 36,
+    status: "AGGRESSIVE",
   },
 ];
+
+type Fighter = typeof fightersData;
 
 const typeDefs = gql`
   enum Status {
@@ -28,36 +20,27 @@ const typeDefs = gql`
     LIGHT_AGGRESSIVE
   }
 
-  type Leader {
-    name: String
-    age: Int
-    timeOfLeader: String
-  }
+  # input FighterInput {
 
-  type Member {
-    name: String
-    age: Int
-    cool: Boolean
-  }
+  # }
 
-  type Ultra {
+  type Fighter {
     id: ID
-    name: String
-    team: String
-    rating: Int
+    name: String!
+    gym: String!
+    skills: [String]!
+    age: Int
     status: Status
-    leader: Leader
-    members: [Member]
   }
 
   type Query {
-    ultras: [Ultra]
+    fighters: [Fighter]
   }
 `;
 
 const resolvers = {
   Query: {
-    ultras: () => ultrasData,
+    fighters: () => fightersData,
   },
 };
 
