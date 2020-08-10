@@ -1,30 +1,63 @@
 import { ApolloServer, gql } from "apollo-server";
 
-const dogsData = [
+const ultrasData = [
   {
-    name: "Harry Potter",
-    owner: "J.K. Rowling",
+    name: "Zyleta",
+    team: "Legi warszawa",
+    rating: 5,
+    status: "VERY_AGGRESSIVE",
+    leader: { name: "Staruch", age: 34, timeOfLeader: "12 years" },
   },
   {
-    name: "Jurassic Park",
-    owner: "Michael Crichton",
+    name: "Anglarna",
+    team: "IFK GBG",
+    rating: 3,
+  },
+  {
+    name: "Juve",
+    team: "Drugi",
+    rating: 4,
   },
 ];
 
 const typeDefs = gql`
-  type Dog {
+  enum Status {
+    VERY_AGGRESSIVE
+    AGGRESSIVE
+    SEMI_AGGRESSIVE
+    LIGHT_AGGRESSIVE
+  }
+
+  type Leader {
     name: String
-    owner: String
+    age: Int
+    timeOfLeader: String
+  }
+
+  type Member {
+    name: String
+    age: Int
+    cool: Boolean
+  }
+
+  type Ultra {
+    id: ID
+    name: String
+    team: String
+    rating: Int
+    status: Status
+    leader: Leader
+    members: [Member]
   }
 
   type Query {
-    dogs: [Dog]
+    ultras: [Ultra]
   }
 `;
 
 const resolvers = {
   Query: {
-    dogs: () => dogsData,
+    ultras: () => ultrasData,
   },
 };
 
