@@ -2,11 +2,20 @@ import { ApolloServer, gql } from "apollo-server";
 
 const fightersData = [
   {
+    id: "sdadss21321sa",
     name: "Yodsanaklai",
     gym: "Fairtex",
     skills: ["Left kick", "Left side", "strong"],
     age: 36,
     status: "AGGRESSIVE",
+  },
+  {
+    id: "212ssa@@33",
+    name: "Petchmarakot",
+    gym: "Petchyindee",
+    skills: ["Smart", "Knees"],
+    age: 25,
+    status: "SMART",
   },
 ];
 
@@ -18,6 +27,7 @@ const typeDefs = gql`
     AGGRESSIVE
     SEMI_AGGRESSIVE
     LIGHT_AGGRESSIVE
+    SMART
   }
 
   # input FighterInput {
@@ -35,12 +45,21 @@ const typeDefs = gql`
 
   type Query {
     fighters: [Fighter]
+    fighter(id: ID): Fighter
   }
 `;
 
 const resolvers = {
   Query: {
     fighters: () => fightersData,
+    fighter: (obj: any, args: { id: string }, context: any, info: any) => {
+      const { id } = args;
+      const foundFighter = fightersData.find((fighter) => fighter.id === id);
+      if (!foundFighter) {
+        throw new Error("Id not found ");
+      }
+      return foundFighter;
+    },
   },
 };
 
