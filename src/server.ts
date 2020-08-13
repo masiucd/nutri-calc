@@ -126,6 +126,11 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   tracing: true,
+  introspection: true,
+  playground: true,
+  context: ({ req }) => {
+    const token = req.headers.authorization || "";
+  },
   // context: async () => ({ db: await connectDb() }),
 });
 
