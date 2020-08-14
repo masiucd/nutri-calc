@@ -15,3 +15,10 @@ export interface Fighter {
   status?: Status;
   createdAt?: Date;
 }
+
+export interface CreateGymInput {
+  name: string;
+  password: string;
+  fighter: string[];
+  date: Date;
+}

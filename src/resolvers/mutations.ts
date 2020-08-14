@@ -1,3 +1,0 @@
-const gymMutations = {};
-
-export { gymMutations };

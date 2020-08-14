@@ -1,10 +1,6 @@
 import { ApolloServer, gql } from "apollo-server";
-import { GraphQLScalarType, Kind } from "graphql";
 import connectDb from "./db/connectDb";
-import { Fighter as FighterType } from "./types";
-import { fightersQueries } from "./resolvers/queries";
-import { fightersData } from "./db/fakeData";
-// type Fighter = typeof fightersData;
+import resolvers from "./resolvers";
 
 const typeDefs = gql`
   scalar Date
@@ -26,6 +22,14 @@ const typeDefs = gql`
     createdAt: Date
   }
 
+  input RegisterInput {
+    id: ID
+    name: String!
+    password: String!
+    fighters: [String]
+    createdAt: Date
+  }
+
   type Fighter {
     id: ID
     name: String!
@@ -36,6 +40,14 @@ const typeDefs = gql`
     createdAt: Date
   }
 
+  type Gym {
+    id: ID
+    name: String!
+    password: String!
+    fighters: [Fighter]
+    createdAt: Date
+  }
+
   type Query {
     fighters: [Fighter]
     fighter(id: ID): Fighter
@@ -43,56 +55,13 @@ const typeDefs = gql`
 
   type Mutation {
     addFighter(fighter: FighterInput): [Fighter]
+    registerGym(gym: RegisterInput): Gym
   }
 `;
 
-const resolvers = {
-  Query: {
-    fighters: fightersQueries.fighters,
-    fighter: fightersQueries.fighter,
-  },
-
-  Mutation: {
-    addFighter: (
-      parent: any,
-      args: { fighter: FighterType },
-      context: any,
-      info: any,
-    ) => {
-      const { id, name, createdAt } = args.fighter;
-      const newList = [
-        ...fightersData,
-        {
-          id,
-          name,
-          createdAt,
-        },
-      ];
-      return newList;
-    },
-  },
-
-  Date: new GraphQLScalarType({
-    name: "Date",
-    description: "Custom date type",
-    parseValue(value) {
-      // value from the client
-    },
-    serialize(value) {
-      // value sent to the client
-    },
-    parseLiteral(ast) {
-      if (ast.kind === Kind.INT) {
-        return new Date(ast.value);
-      }
-      return null;
-    },
-  }),
-};
-
-// (async () => {
-//   await connectDb();
-// })();
+(async () => {
+  await connectDb();
+})();
 
 const server = new ApolloServer({
   typeDefs,
@@ -100,9 +69,7 @@ const server = new ApolloServer({
   tracing: true,
   introspection: true,
   playground: true,
-  context: ({ req }) => {
-    const token = req.headers.authorization || "";
-  },
+  context: ({ req }) => {},
 });
 
 server.listen().then(({ url }) => {

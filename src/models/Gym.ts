@@ -1,5 +1,7 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, HookNextFunction } from "mongoose";
 import { Fighter } from "../types";
+import bcrypt from "bcryptjs";
+// import jwt from 'jsonwebtoken'
 
 export interface IGym extends Document {
   name: string;
@@ -13,6 +15,7 @@ const gymSchema = new Schema<IGym>(
     name: {
       type: String,
       required: ["name is required", true],
+      unique: true,
     },
     password: {
       type: String,
@@ -30,6 +33,17 @@ const gymSchema = new Schema<IGym>(
     toObject: { virtuals: true },
   },
 );
+
+gymSchema.pre<IGym>("save", async function (next: HookNextFunction) {
+  const gym = this;
+
+  let salt = await bcrypt.genSalt(8);
+  if (gym.isModified("password")) {
+    gym.password = await bcrypt.hash(gym.password, salt);
+  }
+
+  next();
+});
 
 const Gym = mongoose.model("Gym", gymSchema);
 
