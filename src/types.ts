@@ -19,6 +19,6 @@ export interface Fighter {
 export interface CreateGymInput {
   name: string;
   password: string;
-  fighter: string[];
+  fighters: string[];
   date: Date;
 }

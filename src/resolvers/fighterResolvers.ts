@@ -12,9 +12,12 @@ import { fightersData } from "../db/fakeData";
 import { Fighter as FighterType } from "../types";
 
 const resolvers = {
-  fighters: () => fightersData,
+  fighters: () => {
+    return fightersData;
+  },
   fighter: (parent: any, args: { id: string }, context: any, info: any) => {
     const { id } = args;
+    console.log(context);
     const foundFighter = fightersData.find((fighter) => fighter.id === id);
     if (!foundFighter) {
       throw new Error("Id not found ");

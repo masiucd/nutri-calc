@@ -6,6 +6,8 @@ const resolvers = {
   Query: {
     fighters: fighterResolver.fighters,
     fighter: fighterResolver.fighter,
+    gyms: gymResolver.getAllGyms,
+    getGymById: gymResolver.getGymById,
   },
 
   Mutation: {

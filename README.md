@@ -7,10 +7,10 @@
 
 <div align="center">
 
-[![Status](https://img.shields.io/badge/status-active-success.svg)](https://github.com/masiuciszek/Muay-thai-api)
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/masiuciszek/Muay-thai-api/issues)
+<!-- [![Status](https://img.shields.io/badge/status-active-success.svg)](https://github.com/masiuciszek/Muay-thai-api)
+[![GitHub Issues](https://img.shields.io/bitbucket/issues-raw/ciszekmarcell/Muay-thai-api?color=masiu&label=issues&logo=masiu&logoColor=masiu&style=plastic)](https://github.com/masiuciszek/Muay-thai-api/issues)
 [![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/masiuciszek/Muay-thai-api/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE) -->
 
 </div>
 

@@ -1,13 +1,14 @@
 import mongoose, { Schema, Document, HookNextFunction } from "mongoose";
 import { Fighter } from "../types";
 import bcrypt from "bcryptjs";
-// import jwt from 'jsonwebtoken'
+import jwt from "jsonwebtoken";
 
 export interface IGym extends Document {
   name: string;
   password: string;
   fighters: Array<Fighter["id"]>;
   createdAt: Date;
+  generateToken: () => Promise<string>;
 }
 
 const gymSchema = new Schema<IGym>(
@@ -45,6 +46,16 @@ gymSchema.pre<IGym>("save", async function (next: HookNextFunction) {
   next();
 });
 
-const Gym = mongoose.model("Gym", gymSchema);
+gymSchema.methods.generateToken = async function (): Promise<string> {
+  const gym = this;
+
+  const token = await jwt.sign({ id: gym._id }, "secret", { expiresIn: "24h" });
+
+  await gym.save();
+
+  return token;
+};
+
+const Gym = mongoose.model<IGym>("Gym", gymSchema);
 
 export default Gym;
