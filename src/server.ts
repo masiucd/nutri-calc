@@ -2,28 +2,8 @@ import { ApolloServer, gql } from "apollo-server";
 import { GraphQLScalarType, Kind } from "graphql";
 import connectDb from "./db/connectDb";
 import { Fighter as FighterType } from "./types";
-
-const fightersData = [
-  {
-    id: "sdadss21321sa",
-    name: "Yodsanaklai",
-    gym: "Fairtex",
-    skills: ["Left kick", "Left side", "strong"],
-    age: 36,
-    status: "AGGRESSIVE",
-    createdAt: new Date("04-12-2020"),
-  },
-  {
-    id: "212ssa@@33",
-    name: "Petchmarakot",
-    gym: "Petchyindee",
-    skills: ["Smart", "Knees"],
-    age: 25,
-    status: "SMART",
-    createdAt: new Date("10-12-2002"),
-  },
-];
-
+import { fightersQueries } from "./resolvers/queries";
+import { fightersData } from "./db/fakeData";
 // type Fighter = typeof fightersData;
 
 const typeDefs = gql`
@@ -68,16 +48,8 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    fighters: () => fightersData,
-    fighter: (parent: any, args: { id: string }, context: any, info: any) => {
-      console.log("parent ", parent, "context ", context, "info ", info);
-      const { id } = args;
-      const foundFighter = fightersData.find((fighter) => fighter.id === id);
-      if (!foundFighter) {
-        throw new Error("Id not found ");
-      }
-      return foundFighter;
-    },
+    fighters: fightersQueries.fighters,
+    fighter: fightersQueries.fighter,
   },
 
   Mutation: {
@@ -131,7 +103,6 @@ const server = new ApolloServer({
   context: ({ req }) => {
     const token = req.headers.authorization || "";
   },
-  // context: async () => ({ db: await connectDb() }),
 });
 
 server.listen().then(({ url }) => {
