@@ -1,13 +1,4 @@
 import { fightersData } from "../db/fakeData";
-// import {
-//   Resolver,
-//   Mutation,
-//   Arg,
-//   Int,
-//   Query,
-//   InputType,
-//   Field,
-// } from "type-graphql";
 
 import { Fighter as FighterType } from "../types";
 

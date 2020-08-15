@@ -13,6 +13,8 @@ const resolvers = {
   Mutation: {
     addFighter: fighterResolver.addFighter,
     registerGym: gymResolver.register,
+    updateGym: gymResolver.updateGym,
+    deleteGym: gymResolver.deleteGym,
   },
 
   Date: scalers.date,

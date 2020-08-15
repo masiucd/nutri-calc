@@ -1,3 +1,4 @@
+import { Request, Response } from "express";
 export enum Status {
   VERY_AGGRESSIVE = "VERY_AGGRESSIVE",
   AGGRESSIVE = "AGGRESSIVE",
@@ -21,4 +22,14 @@ export interface CreateGymInput {
   password: string;
   fighters: string[];
   date: Date;
+}
+
+export interface Ctx {
+  req: Request;
+  res: Response;
+}
+
+export interface GymInput {
+  id: string;
+  name?: string;
 }

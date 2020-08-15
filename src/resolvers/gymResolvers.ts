@@ -1,27 +1,11 @@
-import { CreateGymInput } from "../types";
+import { CreateGymInput, Ctx, GymInput } from "../types";
 import { Request } from "express";
 import Gym from "../models/Gym";
-// import {
-//   Resolver,
-//   Mutation,
-//   Arg,
-//   Int,
-//   Query,
-//   InputType,
-//   Field,
-// } from "type-graphql";
-
-// @Resolver()
-// export class GymResolver {}
 
 export const gymResolver = {
-  getAllGyms: async (
-    parent: any,
-    args: { gym: CreateGymInput },
-    ctx: { req: Request },
-  ) => {
+  getAllGyms: async (parent: any, args: { gym: CreateGymInput }, ctx: Ctx) => {
     const gyms = await Gym.find({});
-    console.log(ctx.req.headers);
+
     if (!gyms) throw new Error("No gyms in DB");
     return gyms;
   },
@@ -43,16 +27,30 @@ export const gymResolver = {
     return newGym;
   },
 
-  getGymById: async (
-    parent: any,
-    args: { id: string },
-    context: any,
-    info: any,
-  ) => {
+  getGymById: async (parent: any, args: { id: string }, context: Ctx) => {
     const gym = await Gym.findById(args.id);
 
     if (!gym) throw new Error(`Gym with id ${args.id} not found`);
 
     return await gym;
+  },
+
+  updateGym: async (parent: any, args: GymInput, context: Ctx) => {
+    const gym = await Gym.findByIdAndUpdate(
+      args.id,
+      { name: args.name },
+      {
+        runValidators: true,
+      },
+    );
+
+    await gym?.save();
+
+    return gym;
+  },
+
+  deleteGym: async (parent: any, args: GymInput, context: Ctx) => {
+    await Gym.findByIdAndRemove(args.id);
+    return true;
   },
 };
