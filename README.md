@@ -62,3 +62,6 @@ x.toUpper // will not work because we don't have access to it
 ```
 
 What gets return in the object is what we will be able to access sing the `x` constant.
+
+Closures will bend your brain trust me, but they are so powerful, and probably the first thing you should focus on after you are comfortable with variables, loops, functions etc.
+A good way to start is to read [Kyle Simpsons](https://github.com/getify) books [You don't know JS](https://github.com/getify/You-Dont-Know-JS)
