@@ -20,8 +20,8 @@ function module(name) {
   }
 }
 
-const x = module("marcell")
+// const x = module("marcell")
 
-x.speak()
-x.shout()
-x.toUpper // will not work because we don't have access to it
+// x.speak()
+// x.shout()
+// x.toUpper // will not work because we don't have access to it
