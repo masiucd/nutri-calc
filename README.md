@@ -8,6 +8,27 @@
 ## Closures <a name = "closures"></a>
 
 Closures! Probably the most powerful tool you can use if you ask me.
+You probably used closures without even knowing it. If you have used higher order functions like `Array.prototype.map` or `Array.prototype.filter` you are using a closure.
+
+```js
+// the x is the inner function, we creating/using a closure
+// the outer function will not have access to the inner
+
+const xs = [1, 2, 3, 4, 5]
+
+xs.map(x => x * 2) // [1,4,6,8,10]
+
+xs.map(function (x) {
+  return x * 2 // [1,4,6,8,10]
+})
+
+xs.filter(x => x % 2 == 0)
+
+xs.filter(function (x) {
+  return x % 2 === 0
+})
+```
+
 Closure is combination of different function together, with references to its surrounding state (the lexical environment)
 Closure give you access to a outer function score from a inner scope. The outer scope can not access the inner scope.
 
