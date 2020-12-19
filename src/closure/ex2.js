@@ -13,3 +13,16 @@ const foo = x => {
 
 // const c = foo(-10)()
 // console.log(c)
+
+function run(name) {
+  function showName() {
+    return name
+  }
+  return { showName }
+}
+
+// const x = run("bob")
+// const y = run("mike")
+
+// console.log(x.showName())
+// console.log(y.showName())

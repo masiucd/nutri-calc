@@ -4,6 +4,7 @@
 
 - [About](#about)
 - [Closures](#closures)
+  - [Callback](#cb)
 
 ## Closures <a name = "closures"></a>
 
@@ -86,3 +87,44 @@ What gets return in the object is what we will be able to access sing the `x` co
 
 Closures will bend your brain trust me, but they are so powerful, and probably the first thing you should focus on after you are comfortable with variables, loops, functions etc.
 A good way to start is to read [Kyle Simpsons](https://github.com/getify) books [You don't know JS](https://github.com/getify/You-Dont-Know-JS)
+
+## Call back function <a name = "cb"></a>
+
+A callback is simply when you pass a function as a argument into another function, a good example of this when you use the `DOM` api and listen for some kind of event.
+
+The second argument is our callback
+
+```js
+document.addEventListener("click", () => {
+  console.log("click")
+})
+```
+
+We could also write it like this to make it more clear:
+
+```js
+const checkClick = () => {
+  console.log("click")
+}
+document.addEventListener("click", checkClick)
+```
+
+Here is a example of how we can combine closures and callback together:
+
+```js
+const callbackFn = () => {
+  let i = 0
+  return () => {
+    console.log("click", ++i)
+  }
+}
+
+const anotherFn = fn => {
+  fn()
+  fn()
+  fn()
+  fn()
+}
+
+anotherFn(callbackFn())
+```
