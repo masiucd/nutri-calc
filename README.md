@@ -3,12 +3,21 @@
 ## Table of Contents
 
 - [About](#about)
+- [Primitive Types](#primitive-types)
+- [Block Scope](#block-scope)
+- [This](#this)
 - [Closures](#closures)
   - [Callback](#cb)
-- [This](#this)
+- [Lexical Scope Arrow Functions](#arrow-fns)
 - [Functional Programing](#fp)
   - [Curried]("#curried")
   - [Compose]("#compose")
+
+## Primitive Types <a name = "primitive-types"></a>
+
+## Block Scope <a name = "block-scope"></a>
+
+## This <a name = "this"></a>
 
 ## Closures <a name = "closures"></a>
 
