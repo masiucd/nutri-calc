@@ -3,10 +3,22 @@
 ## Table of Contents
 
 - [About](#about)
+- [Functions](#functions)
 - [Scope](#scope)
 - [Closures](#closures)
   - [Callback](#cb)
   - [Function wrappers](#fn-wrappers)
+
+## Functions <a name = "functions"></a>
+
+Code we save `(define)` functions and can use `(call)/invoke/run` later with a function name.
+`ts`
+
+**Execution context**
+Created to run the code of a function - has 2 parts:
+
+- Thread of execution
+- Memory
 
 ## Scope <a name = "scope"></a>
 
