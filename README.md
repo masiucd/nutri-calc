@@ -10,6 +10,9 @@
 - [Closures](#closures)
   - [Callback](#cb)
   - [Function wrappers](#fn-wrappers)
+- [Asynchronous JS](#asynchronous-js)
+- [Promises](#promises)
+- [Prototype](#prototype)
 
 ## Functions <a name = "functions"></a>
 
@@ -30,6 +33,70 @@ Created to run the code of a function - has 2 parts:
 - Memory
 
 As soon we create a function we call like a separate program inside the function body that will have it's own local memory. Thar local memory will not be created until we `call/invoke` our function.
+Local memory also cold `aka` `state`.
+
+Closure example using `Javascript` `Rust` and `Go`
+
+```go
+package main
+
+import "fmt"
+
+
+func makeCount() func() int {
+	count := 0
+
+	return func() int {
+		count++
+		fmt.Printf("%d\n",count)
+		return count
+	}
+}
+
+func main() {
+
+	var count = makeCount()
+	count() // 1
+	count() // 2
+	count() // 3
+	count() // 4
+}
+```
+
+```rust
+  fn main() {
+    let mut c = 0;
+
+    // Closure ||
+    let mut inc = || {
+        c += 1;
+        println!("{}", c);
+    };
+
+    inc(); // 1
+    inc(); // 2
+    inc(); // 3
+    inc(); // 4
+}
+```
+
+```ts
+export const makeCount = () => {
+  let count = 0
+  return () => {
+    // Closure
+    count += 1
+    console.log(count)
+    return count
+  }
+}
+
+const c = makeCount()
+c() // 1
+c() // 2
+c() // 3
+c() // 4
+```
 
 ```ts
 // n = parameter
@@ -160,15 +227,27 @@ How come that Javascript well through a error(`syntax error`) on line 10 before 
 The reason why it is important to change the mental model of `Js` is so we can easy understand how the scope actually works. We want to think like a compiler rather then a human, `marble` sorting, yes think as different buckets with different colors where we put different marbles in the buckets, that's how the `Js` complier works and how we could think like that to get a better grasp of the compile life-cycle for Javascript.
 So the buckets are simply our function scope and bracket scope like a `if` statement for example, so called blocks.
 
-- [This](#this)
+> Scope is the rules in any programing language for any given line of code, what data will you have access to.
+
+You can see scope as gates/guards for your code, that what logic goes inside the gate will just stay in the scope.
+With that it does not mean that you can get access to the outer scope and use some values ore mutate it from the inner scope, remember that!
+
+<!-- - [This](#this)
 - [Functional Programing](#fp)
   - [Curried]("#curried")
-  - [Compose]("#compose")
+  - [Compose]("#compose") -->
 
 ## Closures <a name = "closures"></a>
 
-Closures! Probably the most powerful tool you can use if you ask me.
+Closures! Probably the most powerful think that happened to any programing language that have closures.
 You probably used closures without even knowing it. If you have used higher order functions like `Array.prototype.map` or `Array.prototype.filter` you are using a closure.
+I like to visualize a closure like a memory for out functions.
+
+**Note!**
+
+- When our function get called we create a live store data, local memory for our function execution context. - When the function is done, it's local memory gets garbage collected except the return value.
+- But what if our functions could hold on data between executions?
+- Aha! `Closures`
 
 ```js
 // the x is the inner function, we creating/using a closure
@@ -432,3 +511,9 @@ decrementBtn(() => {
 ```
 
 #### composing with callbacks
+
+## Asynchronous JS <a name="asynchronous-js">
+
+## Promises <a name="promises">
+
+## Prototype <a name="prototype">
