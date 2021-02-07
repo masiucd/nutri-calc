@@ -13,6 +13,14 @@
 
 ## Functions <a name = "functions"></a>
 
+Functions in `Javascript` is so called `first class objects`.
+
+They are treated as any object in `JS` and can be passed around like any value in `JS`.
+
+- Pass function as a argument
+- Assigned to variables and properties of other objects
+- Return as values from functions
+
 Code we save `(define)` functions and can use `(call)/invoke/run` later with a function name.
 
 **Execution context**

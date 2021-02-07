@@ -17,3 +17,33 @@ const doubleList = map(double)
 const incrementList = map(add)
 incrementList(xs)
 incrementList([10, 20, 30])
+
+const fib = (n: number): number => {
+  if (n <= 2) return n
+  return fib(n - 1) + fib(n - 2)
+}
+
+const fnWrapper = (fn: Function) => {
+  const cache = new Map<number, number>()
+
+  return (n: number) => {
+    if (cache.get(n)) {
+      return cache.get(n)
+    } else {
+      cache.set(n, fn(n))
+      return fn(n)
+    }
+  }
+}
+
+const identity = <T>(n: T): T => n
+const lower = (s: string): string => s.toLowerCase()
+
+const makeCharCount = (s: string) => {
+  const obj: Record<string, number> = {}
+  for (let char of s) {
+    obj[char] ? (obj[char] += 1) : (obj[char] = 1)
+  }
+
+  return obj
+}
