@@ -2,22 +2,31 @@ package main
 
 import "fmt"
 
+func fn(nums []int) bool {
 
-func makeCount() func() int {
-	count := 0
+	lockup := make(map[int]int)
 
-	return func() int {
-		count++
-		fmt.Printf("%d\n",count)
-		return count
+	for _, v := range nums {
+		_, ok := lockup[v]
+		if ok == true {
+			lockup[v]++
+		} else {
+			lockup[v] = 1
+		}
 	}
+	
+	for _, v := range lockup {
+		fmt.Println(v)
+		if v > 1 {
+			return true
+		}
+	}
+	return false
 }
 
 func main() {
+	xs := []int{1, 2, 1, 3}
 
-	var count = makeCount()
-	count()
-	count()
-	count()
-	count()
+	res:=fn(xs)
+	fmt.Println(res)
 }

@@ -40,3 +40,46 @@ export function isSubsequence(s: string, t: string): boolean {
 
   return j === s.length
 }
+
+const makeCharCount = (s: string) => {
+  const obj: Record<string, number> = {}
+  for (let char of s) {
+    obj[char] ? (obj[char] += 1) : (obj[char] = 1)
+  }
+
+  return obj
+}
+
+function containsDuplicate(nums: number[]): boolean {
+  const numCount: Record<string, number> = {}
+
+  for (const n of nums) {
+    if (!numCount[n]) {
+      numCount[n] = 1
+    } else {
+      numCount[n]++
+    }
+  }
+
+  return Object.values(numCount).some(x => x > 1)
+}
+
+const flattList = (xs: any[]): any[] => {
+  return xs.reduce(function (flat, toFlatten) {
+    return flat.concat(Array.isArray(toFlatten) ? flattList(toFlatten) : toFlatten)
+  }, [])
+}
+
+function plusOne(digits: number[]) {
+  // get the last num in the list
+  // increment the num with one
+  // replace the last num with the new num
+  const xs = [...digits]
+  const last = xs.pop()!
+  xs.push(last + 1)
+  return flattList(xs.map(x => (x > 9 ? x.toString().split("").map(Number) : x)))
+}
+
+// console.log(plusOne([1, 2, 3])) // [1,2,4]
+// console.log(plusOne([0])) // [1]
+console.log(plusOne([9])) // [1,0]

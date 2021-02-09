@@ -47,3 +47,31 @@ const makeCharCount = (s: string) => {
 
   return obj
 }
+
+function containsDuplicate(nums: number[]): boolean {
+  const numCount: Record<string, number> = {}
+
+  for (const n of nums) {
+    if (!numCount[n]) {
+      numCount[n] = 1
+    } else {
+      numCount[n]++
+    }
+  }
+
+  return Object.values(numCount).some(x => x > 1)
+}
+
+function plusOne(digits: number[]): number[] {
+  // get the last num in the list
+  // increment the num with one
+  // replace the last num with the new num
+  const xs = [...digits]
+  const last = xs.pop()!
+  xs.push(last + 1)
+  return xs.map(x => (x > 9 ? x.toString().split("").map(Number) : [x])).flat()
+}
+
+console.log(plusOne([1, 2, 3])) // [1,2,4]
+console.log(plusOne([0])) // [1]
+console.log(plusOne([9])) // [1,0]
