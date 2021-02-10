@@ -70,16 +70,34 @@ const flattList = (xs: any[]): any[] => {
   }, [])
 }
 
-function plusOne(digits: number[]) {
-  // get the last num in the list
-  // increment the num with one
-  // replace the last num with the new num
-  const xs = [...digits]
-  const last = xs.pop()!
-  xs.push(last + 1)
-  return flattList(xs.map(x => (x > 9 ? x.toString().split("").map(Number) : x)))
+function judgeCircle(moves: string): boolean {
+  let upp = 0
+  let down = 0
+  let left = 0
+  let right = 0
+
+  for (let c of moves) {
+    switch (c) {
+      case "U":
+        upp++
+        break
+      case "D":
+        down++
+        break
+      case "L":
+        left++
+        break
+      case "R":
+        right++
+        break
+      default:
+        break
+    }
+  }
+
+  return upp - down === 0 && left - right === 0
 }
 
-// console.log(plusOne([1, 2, 3])) // [1,2,4]
-// console.log(plusOne([0])) // [1]
-console.log(plusOne([9])) // [1,0]
+console.log(judgeCircle("UD"))
+console.log(judgeCircle("LDRRLRUULR"))
+console.log(judgeCircle("LL"))

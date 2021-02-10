@@ -471,16 +471,16 @@ And with closures we can access the lexical scope above us.
 ## functional programing <a name = "fp"></a>
 
 Benefits/Downsides with Javascript is that you can write in different kind of programing paradigms, we have the object oriented approach with `prototypes` that linking to each other, this how classes in javascript works under the hood, remember that classes does not work how they do in languages like `java` or `c++`.
-We have a straight imperative approach where the code like almost like pure `c` code hehe, of course without the poointers and types but the logic look similar.
+We have a straight imperative approach where the code like almost like pure `c` code hehe, of course without the pointers and types but the logic look similar.
 Then we have my favorite the `functional` approach, where we try to write and use pure functions, re use them, compose them to build our application. Like in a traditional `OOP`
 approach we are relaying on inheritance while in `FP` we compose our functions.
 
 #### Curried <a name = "curried" ></a>
 
-**Where curried functions can be usefull in your front application**
-You could preload a function with values that you then can controll via the last function, depending what you want to do. In react his could be for example sending a loaded function with values as a prop and and receiving it in the child component to control what you want to do with those values.
+**Where curried functions can be useful in your front application**
+You could pre-load a function with values that you then can control via the last function, depending what you want to do. In react his could be for example sending a loaded function with values as a prop and and receiving it in the child component to control what you want to do with those values.
 This was a real light bulb moment for me, when I realized how powerful curried functions are and how can use them in a useful way.
-This is also so called `partial applications` just that we are useing 2 parameters in the first function.
+This is also so called `partial applications` just that we are using 2 parameters in the first function.
 
 **a simple example with vanilla js**:
 
@@ -510,9 +510,30 @@ decrementBtn(() => {
 })
 ```
 
-#### composing with callbacks
-
 ## Asynchronous JS <a name="asynchronous-js">
+
+- `JS` is single threaded (one command at a time)
+- Synchronously executed (each line is run in order the code appears)
+
+Javascript is a single threaded synchronies programing language, but still a so powerful and one of the most popular languages in the world. NBut how can we write asynchronous code in Javascript like it would be an multi threaded language.
+
+just a basic example, which one comes first?
+
+```ts
+export function sayHi(s: string) {
+  console.log(`Hi ${s}`)
+}
+
+setTimeout(sayHi, 1200)
+console.log("Yoo")
+```
+
+result would be:
+
+```bash
+  Yoo
+  Hi undefined
+```
 
 ## Promises <a name="promises">
 
