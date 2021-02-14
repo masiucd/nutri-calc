@@ -4,7 +4,7 @@ export const double = (n: number) => n * 2
 export const half = (n: number) => Math.floor(n / 2)
 
 export const memoize = (fn: MathFnType = double) => {
-  const cache = {}
+  const cache: Record<string, number> = {}
 
   // closure!
   return (n: number) => {
