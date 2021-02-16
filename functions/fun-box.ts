@@ -98,6 +98,24 @@ function judgeCircle(moves: string): boolean {
   return upp - down === 0 && left - right === 0
 }
 
-console.log(judgeCircle("UD"))
-console.log(judgeCircle("LDRRLRUULR"))
-console.log(judgeCircle("LL"))
+const average = (xs: number[]): number => {
+  return xs.reduce((a, b) => a + b) / xs.length
+}
+
+const median = (xs: number[]) => {
+  let low = 0
+  let high = xs.length - 1
+  let middleIndex = Math.floor((high + low) / 2)
+  if (xs.length % 2 !== 0) {
+    return xs[middleIndex]
+  } else {
+    let m1 = xs[middleIndex]
+    let m2 = xs[middleIndex + 1]
+    return (m1 + m2) / 2
+  }
+}
+
+const defangIPaddr = (address: string): string => address.slice().replace(/[\.]/g, "[.]")
+
+console.log(foo("1.1.1.1"))
+console.log(foo("255.100.50.0"))
