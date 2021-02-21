@@ -1,5 +1,5 @@
 // Global scope = RED bucket
-let name = "Marcell" // our marble , set to global scope
+const name = "Marcell" // our marble , set to global scope
 
 function greet() {
   // first function scope = BLUE bucket
@@ -7,11 +7,11 @@ function greet() {
   return `Hello ${name}`
 }
 
-function shout(s) {
+export function shout(s: string) {
   // second function scope = GREEN bucket
-  let name = s
+  let name = s.slice()
   return `HELLO ${name}!`
 }
 
-console.log(greet())
-console.log(shout(name))
+// console.log(greet())
+// console.log(shout(name))
