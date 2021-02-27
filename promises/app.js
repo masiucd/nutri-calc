@@ -1,17 +1,17 @@
-const API_URL_ST = "https://starwars.egghead.training"
-const API_URL_WITH_ERROR = "https://starwars.egghead.training/"
+const API_URL_ST = "https://starwars.egghead.training";
+const API_URL_WITH_ERROR = "https://starwars.egghead.training/";
 
 fetch(API_URL_ST + "/films")
   .then(res => res.json())
   .then(res => renderMovies(res))
   .catch(err => {
-    console.log("ohh noww")
-    console.error(err)
-    displayError(err)
-  })
+    console.log("ohh noww");
+    console.error(err);
+    displayError(err);
+  });
 
 function renderMovies(movies) {
-  console.log("movies", movies)
+  console.log("movies", movies);
   document.getElementById("output").innerHTML = movies
     .map(
       movie =>
@@ -23,9 +23,9 @@ function renderMovies(movies) {
         </li>
       `,
     )
-    .join("")
+    .join("");
 }
 
 function displayError(err) {
-  document.getElementById("output").innerHTML = `<h3>${err.message} :(</h3>`
+  document.getElementById("output").innerHTML = `<h3>${err.message} :(</h3>`;
 }

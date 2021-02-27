@@ -12,7 +12,7 @@ Same goes for our program in `JS` we don't want our promise to block rest of the
 But something can go wrong and that case the promise will be `rejected`.
 Remember that a promise can only have on state and could not be changed back to another. Once a promise is `rejected` it can't be `fulfilled` or the straight opposite.
 
-#### chained promises
+### chained promises
 
 By promise chaining when keep the promise iin our little box, as long we will chain a new `.then()` to it we will keep the promise in the box. To resolve/unwrap our promise we need to return from it.
 

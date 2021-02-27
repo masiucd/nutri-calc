@@ -10,7 +10,7 @@ class Dog {
 }
 
 const snickers = new Dog();
-console.log(snickers.barfing());
+// console.log(snickers.barfing());
 
 // Factory function
 const makeDog = () => {

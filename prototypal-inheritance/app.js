@@ -1,17 +1,10 @@
-function Person(name) {
-  this.name = name;
-  this.score = 0;
-}
+const a = { a: "fff", s: 21 };
 
-Person.prototype.age = 22;
+const b = a;
+const c = { ...a };
 
-const mike = new Person("Mike");
-console.log(mike);
-console.log(mike.age);
+console.log(a === b);
+console.log(a === c);
 
-Person.prototype.incrementScore = function () {
-  this.score += 1;
-};
-
-mike.incrementScore();
-console.log(mike);
+console.log(a.constructor);
+console.log(a);

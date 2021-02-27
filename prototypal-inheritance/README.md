@@ -30,5 +30,15 @@ When the new keyword is used on a function there a few steps that happens automa
 - Binds the newly created object instance as the this context.
 - Returns `this` if the function does not returns an object.
 
-<img src="./new.png"> 
+<img src="./new.png">
 <img src="./ll.svg">
+
+## Constructor pattern
+
+When a function is declared they are automatically given a property that has a value of an object.
+
+<img src="./constructor.png">
+
+## This keyword
+
+<img src="./this.png">
