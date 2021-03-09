@@ -1,6 +1,6 @@
-const getData = (url: string) => (endpoint: string) => (handler: Function) => {
+export const getData = (url: string) => (endpoint: string) => (handler: Function) => {
   const response = fetch(`${url}/${endpoint}`)
-    .then(res => res.json())
+    .then((res: { json: () => any }) => res.json())
     .then(res => handler(res))
 
   return response
