@@ -19,4 +19,12 @@ export const anagram = (s1: string, s2: string) => {
   return true
 }
 
-console.log(anagram("anagram", "anagrma"))
+const a: any = { name: "bob" }
+const c: any = { age: 99 }
+function foo(b: any) {
+  b.age = c.age
+}
+
+foo(a)
+console.log(a)
+console.log(c)
