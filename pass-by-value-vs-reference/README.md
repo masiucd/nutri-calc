@@ -9,7 +9,7 @@ const foo = a => {
 }
 let x = 1
 foo(x)
-// x is still number 1
+// x is still number 1 -- no change
 ```
 
 So what about non primitive types like `Objects` for example?
