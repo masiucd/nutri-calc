@@ -1,4 +1,6 @@
 // const { uniqBy, union } = require("lodash");
+import { ld } from "../../package.ts";
+
 const products = [
   { name: "Baggage", travellersIds: [104476297, 104476298] },
   { name: "Flexible Ticket", travellersIds: [104476297, 104476298] },
@@ -11,40 +13,24 @@ const products = [
 ];
 
 const selectedTraveler = [104476299];
+const selectedTraveler2 = [104476299, 104476297];
 
-const xs = products
-  .map((x, i, list) => {
-    return x.name;
-  })
-  .filter((x, i, arr) => {
-    // console.log(arr);
-    return arr.indexOf(x) === i;
+const foo = products.filter(product => {
+  const isEmpty = product.travellersIds.length === 0;
+  if (isEmpty) return product;
+  return product.travellersIds.some((x, i) => {
+    // console.log(selectedTraveler[i]);
+    return x === selectedTraveler[i];
   });
+});
 
-// console.log(uniqBy(products, x => x.name  ));
+console.log(foo);
 
-// console.log(
-//   products.filter(x => {
-//     return x.travellersIds.includes(selectedTraveler[0]);
-//   })
-// );
-// console.log(union(products, [{ name: "Flexible Ticket", travellersIds: [104476299] }]));
+const unique = ld.uniqBy(products, (x: Record<string, any>) => x.name);
 
-// console.log(products.filter(p => p.travellersIds.indexOf(selectedTraveler[0]) !== -1));
-
-// const foo = products.filter(p => p.travellersIds.indexOf(selectedTraveler[0]) !== -1);
-
-// console.log(foo);
-
-// const unique = products.filter(
-//   (item, index) => products.findIndex(obj => obj.name === item.name) === index
-// );
-
-// console.log(unique);
-
-const removeDuplicates = (list: Record<string, any>[], key: string) => {
+const removeDuplicates = (list: typeof products, key: string) => {
   const cache = {};
-  const xs: Record<string, any[]>[] = [];
+  const xs: Record<string, any>[] = [];
   list.forEach(item => {
     //@ts-ignore
     if (!cache[item[key]]) {
@@ -59,3 +45,10 @@ const removeDuplicates = (list: Record<string, any>[], key: string) => {
 // let x = removeDuplicates(products, "name");
 
 // console.log(x);
+
+const listA = ["a", "b", "c", "d"];
+const listB = ["a", "d"];
+
+const found = listA.some(r => listB.includes(r));
+const found2 = products.filter(x => x.travellersIds.some(r => selectedTraveler.includes(r)));
+console.log(found2);
