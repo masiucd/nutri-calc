@@ -29,12 +29,10 @@ console.log(foo);
 const unique = ld.uniqBy(products, (x: Record<string, any>) => x.name);
 
 const removeDuplicates = (list: typeof products, key: string) => {
-  const cache = {};
-  const xs: Record<string, any>[] = [];
-  list.forEach(item => {
-    //@ts-ignore
+  const cache: Record<string, boolean> = {};
+  const xs: Record<string, string | number>[] = [];
+  list.forEach((item: Record<string, any>) => {
     if (!cache[item[key]]) {
-      //@ts-ignore
       cache[item.name] = true;
       xs.push(item);
     }
@@ -42,13 +40,8 @@ const removeDuplicates = (list: typeof products, key: string) => {
   return xs;
 };
 
-// let x = removeDuplicates(products, "name");
-
-// console.log(x);
-
 const listA = ["a", "b", "c", "d"];
 const listB = ["a", "d"];
 
 const found = listA.some(r => listB.includes(r));
 const found2 = products.filter(x => x.travellersIds.some(r => selectedTraveler.includes(r)));
-console.log(found2);
