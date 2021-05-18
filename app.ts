@@ -1,30 +1,39 @@
-export const anagram = (s1: string, s2: string) => {
-  const map: Map<string, number> = new Map()
+interface O {
+  id: number;
+  name: string;
+}
 
-  for (const char of s1) {
-    if (!map.has(char)) {
-      map.set(char, 1)
-    } else {
-      let current = map.get(char)!
-      map.set(char, current + 1)
+const uniqueList = <T, K extends keyof T>(list: T[], key: K) => {
+  const result: T[] = [];
+  const cache: Record<any, any> = {};
+
+  console.log(key);
+  for (const [index, value] of list.entries()) {
+    // @ts-ignore
+    if (!cache[value[key]]) {
+      // @ts-ignore
+      cache[value[key]] = true;
+      result.push(value);
     }
   }
+  console.log(cache);
+  return result;
+};
 
-  for (const c of s2) {
-    if (!map.has(c)) return false
-    let current = map.get(c)!
-    map.set(c, current - 1)
-  }
+const xs: O[] = [
+  { id: 1, name: "🎅🏻" },
+  { id: 2, name: "🌞" },
+  { id: 2, name: "🐨" },
+  { id: 1, name: "🐰" },
+  { id: 2, name: "🙈" },
+  { id: 3, name: "🎅♥️" },
+  { id: 1, name: "⏰" },
+];
 
-  return true
-}
+// console.log(uniqueList(xs, "id"));
 
-const a: any = { name: "bob" }
-const c: any = { age: 99 }
-function foo(b: any) {
-  b.age = c.age
-}
+const fooo = <T, K extends keyof T>(object: T, key: K) => {
+  return object[key];
+};
 
-foo(a)
-console.log(a)
-console.log(c)
+console.log(fooo(xs[0], "name"));
