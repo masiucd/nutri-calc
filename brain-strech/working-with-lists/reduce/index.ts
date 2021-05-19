@@ -41,4 +41,26 @@ const transformedDevs = developers.reduce((list: string[], developer: Developer)
   return list
 }, [])
 
-console.log(transformedDevs)
+type Rating = "good" | "ok" | "nice"
+const fruit: Record<string, Rating> = {
+  banana: "good",
+  strawberry: "good",
+  kiwi: "ok",
+  orange: "nice",
+  grape: "ok",
+  berries: "nice",
+}
+
+const onlyNiceFruits = Object.entries(fruit).reduce((fruiBasket, [fruit, rate]) => {
+  if (rate === "nice") {
+    return { ...fruiBasket, [fruit]: rate }
+  }
+  return fruiBasket
+}, {})
+
+const okayFruits = Object.keys(fruit).reduce((list: string[], fruitItem) => {
+  if (fruit[fruitItem] === "good") {
+    list.push(fruitItem)
+  }
+  return list
+}, [])
