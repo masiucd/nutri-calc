@@ -1,39 +1,16 @@
-interface O {
-  id: number;
-  name: string;
-}
+const firstDuplicate = (s: string) => {
+  const store = new Map<string, boolean>()
 
-const uniqueList = <T, K extends keyof T>(list: T[], key: K) => {
-  const result: T[] = [];
-  const cache: Record<any, any> = {};
-
-  console.log(key);
-  for (const [index, value] of list.entries()) {
-    // @ts-ignore
-    if (!cache[value[key]]) {
-      // @ts-ignore
-      cache[value[key]] = true;
-      result.push(value);
+  const list = s.split("")
+  for (const char of list) {
+    if (store.has(char)) return char
+    if (!store.has(char)) {
+      store.set(char, true)
     }
   }
-  console.log(cache);
-  return result;
-};
+  console.log(store)
+}
 
-const xs: O[] = [
-  { id: 1, name: "🎅🏻" },
-  { id: 2, name: "🌞" },
-  { id: 2, name: "🐨" },
-  { id: 1, name: "🐰" },
-  { id: 2, name: "🙈" },
-  { id: 3, name: "🎅♥️" },
-  { id: 1, name: "⏰" },
-];
+const s = "abcdefghijklvf"
 
-// console.log(uniqueList(xs, "id"));
-
-const fooo = <T, K extends keyof T>(object: T, key: K) => {
-  return object[key];
-};
-
-console.log(fooo(xs[0], "name"));
+console.log(firstDuplicate(s))
