@@ -42,3 +42,84 @@ const proxy1 = new Proxy(target, handler)
 
 console.log(proxy1.name) ---> Tina
 ```
+
+```ts
+const obj = {
+  name: "Bob",
+  isCool: true,
+}
+
+const handler = {
+  get: function (target: typeof obj, prop: string, receiver: typeof obj) {
+    return "I will decide what to return, Mohaha!"
+  },
+}
+
+const proxy1 = new Proxy(obj, handler)
+
+console.log(proxy1.isCool)
+```
+
+Let's make some rules for hour `proxy`. This is a good example when we want the developer to follow some kind of rule.
+
+```ts
+const obj = {
+  name: "Bob",
+  isCool: true,
+  age: 21,
+}
+
+const handler = {
+  get: function (target: typeof obj, prop: string, receiver: typeof obj) {
+    if (prop === "name") return target.name
+    if (prop === "isCool") return `${target.name} isCool`
+    return "I will decide what to return, Mohaha!"
+  },
+}
+
+const proxy1 = new Proxy(obj, handler)
+```
+
+```ts
+const obj = {
+  name: "Bob",
+  isCool: true,
+  age: 21,
+}
+
+type ObjType = typeof obj
+type ObjKeys = keyof typeof obj
+
+const handler = {
+  get: function (target: ObjType, prop: ObjKeys, receiver: ObjType) {
+    return prop in target ? target[prop] : "foo"
+  },
+}
+
+const proxy1 = new Proxy(obj, handler)
+
+console.log(proxy1.age)
+```
+
+```ts
+const person = {
+  name: "bob",
+  age: 45,
+}
+
+const handler: ProxyHandler<any> = {
+  set: (obj: typeof person, prop: keyof typeof person, value: any) => {
+    console.log("value", value, "")
+    if (prop === "age") {
+      if (typeof value !== "number") {
+        throw new TypeError("Age must be a number")
+      }
+      person[prop] = value
+    }
+    return true
+  },
+}
+
+const proxy = new Proxy(person, handler)
+proxy.age = 22
+```

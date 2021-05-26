@@ -1,15 +1,21 @@
-const target = {
-  name: "Bob",
-  isCool: true,
+const person = {
+  name: "bob",
+  age: 45,
 }
 
-const handler = {
-  get: function (target: any, prop: any, receiver: any) {
-    console.log({ target, prop, receiver })
-    return "Tina"
+const handler: ProxyHandler<any> = {
+  set: (obj: typeof person, prop: keyof typeof person, value: any) => {
+    console.log("value", value, "")
+    if (prop === "age") {
+      if (typeof value !== "number") {
+        throw new TypeError("Age must be a number")
+      }
+      person[prop] = value
+    }
+    return true
   },
 }
 
-const proxy1 = new Proxy(target, handler)
-
-console.log(proxy1.name)
+const proxy = new Proxy(person, handler)
+proxy.age = 22
+console.log(proxy)
