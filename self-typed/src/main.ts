@@ -1,8 +1,6 @@
 import "./style.css";
-import {setupCounter} from "./counter.ts";
 
 let h1 = document.getElementById("h1") as HTMLHeadingElement;
-
 let textList = [
   "Bonjour, je suis un développeur web",
   "J'aime le JavaScript",
@@ -12,12 +10,11 @@ let textList = [
   "Hola, soy un desarrollador web",
   "Me gusta JavaScript",
 ];
-
 let typeSpeed = 150;
+let idx = 0;
+let removing = false;
+let charCount = 0;
 function type() {
-  let idx = 0;
-  let removing = false;
-  let charCount = 0;
   setInterval(() => {
     console.log({charCount, idx, removing});
 
@@ -46,11 +43,3 @@ function type() {
 }
 
 type();
-
-document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-  <div>
-    
-  </div>
-`;
-
-setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);
