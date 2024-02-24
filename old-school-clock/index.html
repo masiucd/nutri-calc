@@ -1,13 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+    <title>JS clock</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        height: 100%;
+        margin: 0;
+      }
+      header,
+      footer {
+        height: 50px;
+        background-color: #f1f1f1;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        max-width: 900px;
+        margin: 0 auto;
+        border: 2px solid red;
+        height: calc(100dvh - 100px);
+      }
+
+      #app {
+        border: 2px solid blue;
+        flex: 1;
+      }
+    </style>
   </head>
   <body>
-    <div id="app"></div>
+    <header></header>
+    <main>
+      <h1>JS counter</h1>
+      <div id="app"></div>
+    </main>
+    <footer></footer>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
