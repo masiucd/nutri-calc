@@ -1,3 +1,18 @@
+import type {PropsWithChildren} from "react";
+import {Button} from "~/components/ui/button";
+import {Input} from "~/components/ui/input";
+import {Label} from "~/components/ui/label";
+import {RadioGroup, RadioGroupItem} from "~/components/ui/radio-group";
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectTrigger,
+	SelectValue,
+} from "~/components/ui/select";
+import {cn} from "~/lib/utils";
 import type {Route} from "./+types/home";
 
 export function meta({}: Route.MetaArgs) {
@@ -23,98 +38,163 @@ export default function Home() {
 								<p>Calculate your daily nutritional needs</p>
 							</legend>
 
-							<div>
-								<label htmlFor="age">
+							<RadioGroup defaultValue="female" className="flex gap-2">
+								<div className="flex items-center space-x-2">
+									<RadioGroupItem value="female" id="female" />
+									<Label htmlFor="female">Female</Label>
+								</div>
+								<div className="flex items-center space-x-2">
+									<RadioGroupItem value="male" id="male" />
+									<Label htmlFor="male">Male</Label>
+								</div>
+							</RadioGroup>
+
+							<FormGroup>
+								<Label htmlFor="age">
 									Age:
-									<input
+									<Input
 										type="number"
 										id="age"
 										name="age"
 										placeholder="Enter your age"
 										required
 									/>
-								</label>
-							</div>
-							<div>
-								<label htmlFor="weight">
-									Weight:
-									<input
-										type="number"
-										id="weight"
-										name="weight"
-										placeholder="Enter your weight"
-										required
-									/>
-								</label>
-							</div>
+								</Label>
+							</FormGroup>
 
-							<div>
-								<label htmlFor="height">
-									Height:
-									<input
-										type="number"
-										id="height"
-										name="height"
-										placeholder="Enter your height"
-										required
-									/>
-								</label>
-							</div>
+							<FormGroup>
+								<Label htmlFor="weight">Weight:</Label>
+								<RadioGroup defaultValue="kg" className="flex gap-2">
+									<div className="flex items-center space-x-2">
+										<RadioGroupItem value="kg" id="kg" />
+										<Label htmlFor="kg">Kg</Label>
+									</div>
+									<div className="flex items-center space-x-2">
+										<RadioGroupItem value="lbs" id="lbs" />
+										<Label htmlFor="lbs">Lbs</Label>
+									</div>
+								</RadioGroup>
+								<Input
+									type="number"
+									id="weight"
+									name="weight"
+									placeholder="Enter your weight"
+									required
+								/>
+							</FormGroup>
 
-							<div>
-								<label htmlFor="activity-level">
+							<FormGroup>
+								<Label htmlFor="height">Height:</Label>
+								<RadioGroup defaultValue="cm" className="flex gap-2">
+									<div className="flex items-center space-x-2">
+										<RadioGroupItem value="cm" id="cm" />
+										<Label htmlFor="cm">Cm</Label>
+									</div>
+									<div className="flex items-center space-x-2">
+										<RadioGroupItem value="inches" id="inches" />
+										<Label htmlFor="inches">Inches</Label>
+									</div>
+								</RadioGroup>
+								<Input
+									type="number"
+									id="height"
+									name="height"
+									placeholder="Enter your height"
+									required
+								/>
+							</FormGroup>
+
+							<FormGroup>
+								<Label htmlFor="activity-level">
 									Activity Level:
-									<select id="activity-level" name="activity-level" required>
-										<option value="sedentary">Sedentary</option>
-										<option value="lightly-active">Lightly Active</option>
-										<option value="moderately-active">Moderately Active</option>
-										<option value="very-active">Very Active</option>
-									</select>
-								</label>
-							</div>
+									<Select>
+										<SelectTrigger className="w-[180px]">
+											<SelectValue placeholder="activity-level" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectGroup>
+												<SelectLabel>Activity Level</SelectLabel>
+												<SelectItem value="sedentary">Sedentary</SelectItem>
+												<SelectItem value="lightly-active">
+													Lightly Active
+												</SelectItem>
+												<SelectItem value="moderately-active">
+													Moderately Active
+												</SelectItem>
+												<SelectItem value="very-active">Very Active</SelectItem>
+												<SelectItem value="super-active">
+													Super Active
+												</SelectItem>
+												<SelectItem value="extremely-active">
+													Extremely Active
+												</SelectItem>
+											</SelectGroup>
+										</SelectContent>
+									</Select>
+								</Label>
+							</FormGroup>
 
-							<div>
-								<span>Gender</span>
-								<label>
-									male
-									<input type="radio" name="male" id="male" />
-								</label>
-								<label>
-									female
-									<input type="radio" name="female" id="female" />
-								</label>
-							</div>
-
-							<div>
-								<label htmlFor="exercise-frequency">
+							<FormGroup>
+								<Label htmlFor="exercise-frequency">
 									Exercise Frequency:
-									<select name="exercise-frequency" id="exercise-frequency">
-										<option value="none">None</option>
-										<option value="1-2-times-a-week">1-2 times a week</option>
-										<option value="3-4-times-a-week">3-4 times a week</option>
-										<option value="5-or-more-times-a-week">
-											5 or more times a week
-										</option>
-									</select>
-								</label>
-							</div>
+									<Select>
+										<SelectTrigger className="w-[180px]">
+											<SelectValue placeholder="exercise-frequency" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectGroup>
+												<SelectLabel>Exercise Frequency</SelectLabel>
+												<SelectItem value="none">None</SelectItem>
+												<SelectItem value="1-2-times-a-week">
+													1-2 times a week
+												</SelectItem>
+												<SelectItem value="3-4-times-a-week">
+													3-4 times a week
+												</SelectItem>
+												<SelectItem value="5-or-more-times-a-week">
+													5 or more times a week
+												</SelectItem>
+											</SelectGroup>
+										</SelectContent>
+									</Select>
+								</Label>
+							</FormGroup>
 
-							<div>
-								<label htmlFor="fitness-goals">
+							<FormGroup>
+								<Label htmlFor="fitness-goals">
 									Fitness Goals:
-									<select name="fitness-goals" id="fitness-goals">
-										<option value="weight-loss">Weight Loss</option>
-										<option value="muscle-gain">Muscle Gain</option>
-										<option value="endurance">Endurance</option>
-
-										<option value="maintain-weight">Maintain Weight</option>
-									</select>
-								</label>
-							</div>
+									<Select>
+										<SelectTrigger className="w-[180px]">
+											<SelectValue placeholder="fitness-goals" />
+										</SelectTrigger>
+										<SelectContent>
+											<SelectGroup>
+												<SelectLabel>Fitness Goals</SelectLabel>
+												<SelectItem value="weight-loss">Weight Loss</SelectItem>
+												<SelectItem value="muscle-gain">Muscle Gain</SelectItem>
+												<SelectItem value="endurance">Endurance</SelectItem>
+												<SelectItem value="maintain-weight">
+													Maintain Weight
+												</SelectItem>
+											</SelectGroup>
+										</SelectContent>
+									</Select>
+								</Label>
+							</FormGroup>
+							<Button type="submit">Calculate Nutrition</Button>
 						</fieldset>
 					</form>
 				</div>
 			</main>
 		</>
 	);
+}
+
+function FormGroup({
+	children,
+	className,
+}: PropsWithChildren<{
+	className?: string;
+}>) {
+	return <div className={cn("", className)}>{children}</div>;
 }
