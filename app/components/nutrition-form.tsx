@@ -48,8 +48,8 @@ export function NutritionForm() {
 						<User className="text-blue-500" /> Fitness Profile
 					</span>
 
-					<Row className="bg-red-300 justify-between">
-						<FormGroup>
+					<div className="grid grid-cols-4 grid-rows-4 gap-4">
+						<FormGroup className="col-span-2 row-span-2">
 							<RadioGroup defaultValue="female" className="flex flex-col gap-3">
 								<div className="flex items-center space-x-2">
 									<RadioGroupItem value="female" id="female" />
@@ -62,7 +62,7 @@ export function NutritionForm() {
 							</RadioGroup>
 						</FormGroup>
 
-						<FormGroup className="bg-red-200 flex-1">
+						<FormGroup className="col-span-2 col-start-3 row-span-2">
 							<Label htmlFor="age">Age:</Label>
 							<Input
 								type="number"
@@ -72,10 +72,8 @@ export function NutritionForm() {
 								required
 							/>
 						</FormGroup>
-					</Row>
 
-					<Row>
-						<FormGroup>
+						<FormGroup className="col-span-2 row-span-2 row-start-3">
 							<Label htmlFor="weight">Weight:</Label>
 							<div className="flex">
 								<Input
@@ -101,7 +99,7 @@ export function NutritionForm() {
 							</div>
 						</FormGroup>
 
-						<FormGroup>
+						<FormGroup className="col-span-2 col-start-3 row-span-2 row-start-3">
 							<Label htmlFor="height">Height:</Label>
 							<div className="flex">
 								<Input
@@ -125,7 +123,7 @@ export function NutritionForm() {
 								</Select>
 							</div>
 						</FormGroup>
-					</Row>
+					</div>
 				</div>
 
 				<Separator className="mb-5" />
