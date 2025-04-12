@@ -5,5 +5,14 @@
     "source.organizeImports.biome": "always",
     "source.fixAll": "always"
   },
-  "editor.defaultFormatter": "biomejs.biome"
+  "editor.defaultFormatter": "biomejs.biome",
+  "javascript.preferences.autoImportFileExcludePatterns": [
+    "@radix-ui/*",
+    "drizzle-orm/mysql-core"
+  ],
+  // This setting is used to exclude certain packages from auto-import suggestions in TypeScript files.
+  "typescript.preferences.autoImportFileExcludePatterns": [
+    "@radix-ui/*",
+    "drizzle-orm/mysql-core"
+  ]
 }
