@@ -1,5 +1,6 @@
 import {Activity, User} from "lucide-react";
 import type {PropsWithChildren} from "react";
+import {Form} from "react-router";
 import {Button} from "~/components/ui/button";
 import {Input} from "~/components/ui/input";
 import {Label} from "~/components/ui/label";
@@ -16,27 +17,9 @@ import {
 import {cn} from "~/lib/utils";
 import {Separator} from "./ui/separator";
 
-function Row({
-	children,
-	className,
-}: PropsWithChildren<{
-	className?: string;
-}>) {
-	return (
-		<div
-			className={cn(
-				"flex flex-col gap-1 sm:flex-row sm:items-center sm:gap-4",
-				className,
-			)}
-		>
-			{children}
-		</div>
-	);
-}
-
 export function NutritionForm() {
 	return (
-		<form action="">
+		<Form action="/home" method="post">
 			<fieldset className="rounded-md border-2 p-2 shadow-lg">
 				<legend className="mb-5 rounded-sm bg-foreground p-1 text-accent">
 					<h2>Nutrition Calculator</h2>
@@ -50,7 +33,11 @@ export function NutritionForm() {
 
 					<div className="grid grid-cols-4 grid-rows-4 gap-4">
 						<FormGroup className="col-span-2 row-span-2">
-							<RadioGroup defaultValue="female" className="flex flex-col gap-3">
+							<RadioGroup
+								defaultValue="female"
+								className="flex flex-col gap-3"
+								name="gender"
+							>
 								<div className="flex items-center space-x-2">
 									<RadioGroupItem value="female" id="female" />
 									<Label htmlFor="female">Female</Label>
@@ -202,7 +189,7 @@ export function NutritionForm() {
 				</div>
 				<Button type="submit">Calculate Nutrition</Button>
 			</fieldset>
-		</form>
+		</Form>
 	);
 }
 
