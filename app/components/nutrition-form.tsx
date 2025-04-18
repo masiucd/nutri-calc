@@ -1,4 +1,4 @@
-import {Activity, User} from "lucide-react";
+import {Activity as ActivityIcon, User as UserIcon} from "lucide-react";
 import type {PropsWithChildren} from "react";
 import {Form, useNavigation} from "react-router";
 import {Button} from "~/components/ui/button";
@@ -36,7 +36,7 @@ export function NutritionForm() {
 
 				<div className="flex flex-col">
 					<span className="mb-3 flex gap-1">
-						<User className="text-blue-500" /> Fitness Profile
+						<UserIcon className="text-foreground-500" /> Fitness Profile
 					</span>
 					<div className="grid grid-cols-4 grid-rows-4 gap-4">
 						<GenderOptions />
@@ -48,7 +48,7 @@ export function NutritionForm() {
 				<Separator className="mb-5" />
 				<div className="flex flex-col">
 					<span className="mb-3 flex gap-1">
-						<Activity className="text-blue-500" /> Activity & Goals
+						<ActivityIcon className="text-foreground-500" /> Activity & Goals
 					</span>
 					<ActivityLevel />
 					<ExerciseFrequency />
@@ -253,8 +253,7 @@ function FitnessGoal() {
 						<SelectLabel>Fitness Goals</SelectLabel>
 						<SelectItem value="weight-loss">Weight Loss</SelectItem>
 						<SelectItem value="muscle-gain">Muscle Gain</SelectItem>
-						<SelectItem value="endurance">Endurance</SelectItem>
-						<SelectItem value="maintain-weight">Maintain Weight</SelectItem>
+						<SelectItem value="maintenance">Maintain Weight</SelectItem>
 					</SelectGroup>
 				</SelectContent>
 			</Select>
