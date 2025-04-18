@@ -1,6 +1,6 @@
 import {Activity, User} from "lucide-react";
 import type {PropsWithChildren} from "react";
-import {Form} from "react-router";
+import {Form, useNavigation} from "react-router";
 import {Button} from "~/components/ui/button";
 import {Input} from "~/components/ui/input";
 import {Label} from "~/components/ui/label";
@@ -18,9 +18,17 @@ import {cn} from "~/lib/utils";
 import {Separator} from "./ui/separator";
 
 export function NutritionForm() {
+	let navigation = useNavigation();
+	let isPending = navigation.formAction === "/calculate";
+
 	return (
 		<Form action="/calculate" method="post">
-			<fieldset className="rounded-md border-2 p-2 shadow-lg">
+			<fieldset
+				className={cn(
+					"rounded-md border-2 p-2 shadow-lg",
+					isPending && "opacity-50",
+				)}
+			>
 				<legend className="mb-5 rounded-sm bg-foreground p-1 text-accent">
 					<h2>Nutrition Calculator</h2>
 					<p>Calculate your daily nutritional needs</p>
@@ -46,7 +54,9 @@ export function NutritionForm() {
 					<ExerciseFrequency />
 					<FitnessGoal />
 				</div>
-				<Button type="submit">Calculate Nutrition</Button>
+				<Button type="submit">
+					{isPending ? "calculating..." : "Calculate Nutrition"}
+				</Button>
 			</fieldset>
 		</Form>
 	);
