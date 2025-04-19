@@ -130,7 +130,7 @@ function WeightOption() {
 					step={0.1}
 				/>
 
-				<Select name="weight-unit" defaultValue="kg">
+				<Select name="weight_unit" defaultValue="kg">
 					<SelectTrigger className="w-[100px]">
 						<SelectValue placeholder="kg" />
 					</SelectTrigger>
@@ -160,7 +160,7 @@ function HeightOption() {
 					required
 					aria-required="true"
 				/>
-				<Select name="height-unit" defaultValue="cm">
+				<Select name="height_unit" defaultValue="cm">
 					<SelectTrigger className="w-[100px]">
 						<SelectValue placeholder="cm" />
 					</SelectTrigger>
@@ -180,9 +180,9 @@ function HeightOption() {
 function ActivityLevel() {
 	return (
 		<FormGroup>
-			<Label htmlFor="activity-level">Activity Level:</Label>
+			<Label htmlFor="activity_level">Activity Level:</Label>
 			<Select
-				name="activity-level"
+				name="activity_level"
 				defaultValue="sedentary"
 				aria-label="Select activity level"
 				aria-required="true"
@@ -194,11 +194,11 @@ function ActivityLevel() {
 					<SelectGroup>
 						<SelectLabel>Activity Level</SelectLabel>
 						<SelectItem value="sedentary">Sedentary</SelectItem>
-						<SelectItem value="lightly-active">Lightly Active</SelectItem>
-						<SelectItem value="moderately-active">Moderately Active</SelectItem>
-						<SelectItem value="very-active">Very Active</SelectItem>
-						<SelectItem value="super-active">Super Active</SelectItem>
-						<SelectItem value="extremely-active">Extremely Active</SelectItem>
+						<SelectItem value="lightly_active">Lightly Active</SelectItem>
+						<SelectItem value="moderately_active">Moderately Active</SelectItem>
+						<SelectItem value="very_active">Very Active</SelectItem>
+						<SelectItem value="super_active">Super Active</SelectItem>
+						<SelectItem value="extremely_active">Extremely Active</SelectItem>
 					</SelectGroup>
 				</SelectContent>
 			</Select>
@@ -209,9 +209,9 @@ function ActivityLevel() {
 function ExerciseFrequency() {
 	return (
 		<FormGroup>
-			<Label htmlFor="exercise-frequency">Exercise Frequency:</Label>
+			<Label htmlFor="exercise_frequency">Exercise Frequency:</Label>
 			<Select
-				name="exercise-frequency"
+				name="exercise_frequency"
 				defaultValue="none"
 				aria-label="Select exercise frequency"
 				aria-required="true"
@@ -238,10 +238,10 @@ function ExerciseFrequency() {
 function FitnessGoal() {
 	return (
 		<FormGroup>
-			<Label htmlFor="fitness-goals">Fitness Goals:</Label>
+			<Label htmlFor="fitness_goals">Fitness Goals:</Label>
 			<Select
-				name="fitness-goal"
-				defaultValue="weight-loss"
+				name="fitness_goal"
+				defaultValue="weight_loss"
 				aria-label="Select fitness goal"
 				aria-required="true"
 			>
@@ -251,8 +251,8 @@ function FitnessGoal() {
 				<SelectContent>
 					<SelectGroup>
 						<SelectLabel>Fitness Goals</SelectLabel>
-						<SelectItem value="weight-loss">Weight Loss</SelectItem>
-						<SelectItem value="muscle-gain">Muscle Gain</SelectItem>
+						<SelectItem value="weight_loss">Weight Loss</SelectItem>
+						<SelectItem value="muscle_gain">Muscle Gain</SelectItem>
 						<SelectItem value="maintenance">Maintain Weight</SelectItem>
 					</SelectGroup>
 				</SelectContent>

@@ -9,8 +9,19 @@ let HeightUnit = z.enum(["cm", "in"], {
 });
 export type HeightUnit = z.infer<typeof HeightUnit>;
 
+let WeightUnit = z.enum(["kg", "lb"], {
+  errorMap: () => ({ message: "Weight unit must be kg or lb" }),
+});
+export type WeightUnit = z.infer<typeof WeightUnit>;
+
 let ActivityLevel = z.enum(
-  ["sedentary", "lightly-active", "moderately-active", "very-active"],
+  [
+    "sedentary",
+    "lightly_active",
+    "moderate",
+    "active",
+    "very_active",
+  ],
   {
     errorMap: () => ({
       message:
@@ -22,7 +33,7 @@ let ActivityLevel = z.enum(
 export type ActivityLevel = z.infer<typeof ActivityLevel>;
 
 let ExerciseFrequency = z.enum(
-  ["never", "1-2 times a week", "3-4 times a week", "5-6 times a week"],
+  ["none", "1-2-times-a-week", "3-4-times-a-week", "5-6-times-a-week"],
   {
     errorMap: () => ({
       message:
@@ -33,7 +44,7 @@ let ExerciseFrequency = z.enum(
 
 export type ExerciseFrequency = z.infer<typeof ExerciseFrequency>;
 
-let FitnessGoal = z.enum(["weight-loss", "muscle-gain", "maintenance"], {
+let FitnessGoal = z.enum(["weight_loss", "muscle_gain", "maintenance"], {
   errorMap: () => ({
     message: "Fitness goal must be weight loss, muscle gain, or maintenance",
   }),
@@ -45,12 +56,10 @@ export let CalculateSchema = z.object({
   gender: Gender,
   age: z.string().regex(/^\d+$/, "Age must be a number"),
   weight: z.string().regex(/^\d+$/, "Weight must be a number"),
-  "weight-unit": z.enum(["kg", "lb"], {
-    errorMap: () => ({ message: "Weight unit must be kg or lb" }),
-  }),
+  "weight_unit": WeightUnit,
   height: z.string().regex(/^\d+$/, "Height must be a number"),
-  "height-unit": HeightUnit,
-  "activity-level": ActivityLevel,
-  "exercise-frequency": ExerciseFrequency,
-  "fitness-goal": FitnessGoal,
+  "height_unit": HeightUnit,
+  "activity_level": ActivityLevel,
+  "exercise_frequency": ExerciseFrequency,
+  "fitness_goal": FitnessGoal,
 });
