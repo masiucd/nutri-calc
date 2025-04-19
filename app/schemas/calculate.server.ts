@@ -17,32 +17,21 @@ export type WeightUnit = z.infer<typeof WeightUnit>;
 let ActivityLevel = z.enum(
   [
     "sedentary",
-    "lightly_active",
+    "lightly",
     "moderate",
-    "active",
-    "very_active",
+    "very",
+    "super",
+    "extremely",
   ],
   {
     errorMap: () => ({
       message:
-        "Activity level must be sedentary, lightly active, moderately active, or very active",
+        "Activity level must be sedentary, lightly active, moderately active, very active, or extremely active",
     }),
   },
 );
 
 export type ActivityLevel = z.infer<typeof ActivityLevel>;
-
-let ExerciseFrequency = z.enum(
-  ["none", "1-2-times-a-week", "3-4-times-a-week", "5-6-times-a-week"],
-  {
-    errorMap: () => ({
-      message:
-        "Exercise frequency must be never, 1-2 times a week, 3-4 times a week, or 5-6 times a week",
-    }),
-  },
-);
-
-export type ExerciseFrequency = z.infer<typeof ExerciseFrequency>;
 
 let FitnessGoal = z.enum(["weight_loss", "muscle_gain", "maintenance"], {
   errorMap: () => ({
@@ -60,6 +49,6 @@ export let CalculateSchema = z.object({
   height: z.string().regex(/^\d+$/, "Height must be a number"),
   "height_unit": HeightUnit,
   "activity_level": ActivityLevel,
-  "exercise_frequency": ExerciseFrequency,
+
   "fitness_goal": FitnessGoal,
 });

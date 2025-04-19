@@ -51,7 +51,6 @@ export function NutritionForm() {
 						<ActivityIcon className="text-foreground-500" /> Activity & Goals
 					</span>
 					<ActivityLevel />
-					<ExerciseFrequency />
 					<FitnessGoal />
 				</div>
 				<Button type="submit">
@@ -194,40 +193,11 @@ function ActivityLevel() {
 					<SelectGroup>
 						<SelectLabel>Activity Level</SelectLabel>
 						<SelectItem value="sedentary">Sedentary</SelectItem>
-						<SelectItem value="lightly_active">Lightly Active</SelectItem>
-						<SelectItem value="moderately_active">Moderately Active</SelectItem>
-						<SelectItem value="very_active">Very Active</SelectItem>
-						<SelectItem value="super_active">Super Active</SelectItem>
-						<SelectItem value="extremely_active">Extremely Active</SelectItem>
-					</SelectGroup>
-				</SelectContent>
-			</Select>
-		</FormGroup>
-	);
-}
-
-function ExerciseFrequency() {
-	return (
-		<FormGroup>
-			<Label htmlFor="exercise_frequency">Exercise Frequency:</Label>
-			<Select
-				name="exercise_frequency"
-				defaultValue="none"
-				aria-label="Select exercise frequency"
-				aria-required="true"
-			>
-				<SelectTrigger className="w-full">
-					<SelectValue placeholder="Select your Exercise Frequency" />
-				</SelectTrigger>
-				<SelectContent>
-					<SelectGroup>
-						<SelectLabel>Exercise Frequency</SelectLabel>
-						<SelectItem value="none">None</SelectItem>
-						<SelectItem value="1-2-times-a-week">1-2 times a week</SelectItem>
-						<SelectItem value="3-4-times-a-week">3-4 times a week</SelectItem>
-						<SelectItem value="5-or-more-times-a-week">
-							5 or more times a week
-						</SelectItem>
+						<SelectItem value="lightly">Lightly Active</SelectItem>
+						<SelectItem value="moderate">Moderately Active</SelectItem>
+						<SelectItem value="very">Very Active</SelectItem>
+						<SelectItem value="super">Super Active</SelectItem>
+						<SelectItem value="extremely">Extremely Active</SelectItem>
 					</SelectGroup>
 				</SelectContent>
 			</Select>
