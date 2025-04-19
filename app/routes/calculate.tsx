@@ -1,12 +1,14 @@
 import {Check, Copy, TriangleAlert} from "lucide-react";
 import {AnimatePresence, motion} from "motion/react";
+import {toast} from "sonner";
 import {NutritionForm} from "~/components/nutrition-form";
+import {H1, H3, Lead, List} from "~/components/typography";
 import {Alert, AlertDescription, AlertTitle} from "~/components/ui/alert";
 import {Button} from "~/components/ui/button";
+import {Toaster} from "~/components/ui/sonner";
 import {
 	type ActivityLevel,
 	CalculateSchema,
-	type ExerciseFrequency,
 	type FitnessGoal,
 	type GenderType,
 	type HeightUnit,
@@ -37,7 +39,7 @@ export async function action({request}: Route.ActionArgs) {
 			gender,
 			age,
 			activity_level,
-			exercise_frequency,
+
 			fitness_goal,
 		} = parsedData.data;
 		console.log("Parsed data:", parsedData.data);
@@ -49,7 +51,7 @@ export async function action({request}: Route.ActionArgs) {
 			gender,
 			age: Number.parseInt(age),
 			activityLevel: activity_level,
-			exerciseFrequency: exercise_frequency,
+
 			fitnessGoal: fitness_goal,
 		});
 		return {
@@ -76,6 +78,11 @@ export default function CalculateRoute({actionData}: Route.ComponentProps) {
 	console.log({actionData});
 	return (
 		<main className="flex flex-col items-center justify-center pt-16 pb-4">
+			<Toaster position="top-right" />
+			<div className="mb-5 flex flex-col gap-1">
+				<H1>Nutrition Calculator</H1>
+				<Lead>Calculate your daily nutritional needs</Lead>
+			</div>
 			<div>
 				<NutritionForm />
 				<div>
@@ -87,16 +94,25 @@ export default function CalculateRoute({actionData}: Route.ComponentProps) {
 								exit={{opacity: 0, y: -20}}
 								transition={{duration: 0.3}}
 							>
-								<Alert>
+								<Alert className="relative">
+									<Check size={20} />
+
 									<Button
+										variant="ghost"
+										className="absolute top-2 right-2"
 										onClick={() => {
 											if ("clipboard" in navigator) {
 												navigator.clipboard.writeText(
-													`<h1> Your daily caloric needs are ${actionData.data.calculatedData} calories. </h1>`,
+													`Your daily caloric needs are ${actionData.data.calculatedData} calories. \n 
+																				Recommended macros: \n
+																				Protein: ${Math.round((actionData.data.calculatedData * 0.3) / 4)} g \n
+																				Fats: ${Math.round((actionData.data.calculatedData * 0.25) / 9)} g \n
+																				Carbs: ${Math.round((actionData.data.calculatedData * 0.45) / 4)} g \n
+													`,
 												);
+												toast("Results copied to clipboard!");
 											} else {
-												// TODO make your own alert for this
-												alert(
+												toast(
 													"Your browser does not support the Clipboard API.",
 												);
 											}
@@ -104,7 +120,7 @@ export default function CalculateRoute({actionData}: Route.ComponentProps) {
 									>
 										<Copy size={20} />
 									</Button>
-									<Check size={20} />
+
 									<AlertTitle>
 										Result for a {actionData.data.weight}{" "}
 										{actionData.data.weightUnit} {actionData.data.gender}
@@ -114,6 +130,32 @@ export default function CalculateRoute({actionData}: Route.ComponentProps) {
 											Your daily caloric needs are{" "}
 											{actionData.data.calculatedData} calories.
 										</p>
+										<div>
+											<H3>Recommended macros </H3>
+											<List>
+												<li>
+													Protein:{" "}
+													{Math.round(
+														(actionData.data.calculatedData * 0.3) / 4,
+													)}{" "}
+													g
+												</li>
+												<li>
+													Fats:{" "}
+													{Math.round(
+														(actionData.data.calculatedData * 0.25) / 9,
+													)}{" "}
+													g
+												</li>
+												<li>
+													Carbs:{" "}
+													{Math.round(
+														(actionData.data.calculatedData * 0.45) / 4,
+													)}{" "}
+													g
+												</li>
+											</List>
+										</div>
 									</AlertDescription>
 								</Alert>
 							</motion.div>
@@ -156,7 +198,7 @@ function calculateNutritionalNeeds({
 	gender,
 	age,
 	activityLevel,
-	exerciseFrequency,
+
 	fitnessGoal,
 }: {
 	gender: GenderType;
@@ -164,7 +206,7 @@ function calculateNutritionalNeeds({
 	weight: number;
 	height: number;
 	activityLevel: ActivityLevel;
-	exerciseFrequency: ExerciseFrequency;
+
 	fitnessGoal: FitnessGoal;
 	weightUnit: WeightUnit;
 	heightUnit: HeightUnit;
@@ -201,22 +243,12 @@ function calculateNutritionalNeeds({
 	bmr *= activityMultiplier[activityLevel];
 
 	// Adjust BMR based on fitness goal
-	if (fitnessGoal === "weight-loss") {
+	if (fitnessGoal === "weight_loss") {
 		bmr -= 500; // Calorie deficit
-	} else if (fitnessGoal === "muscle-gain") {
+	} else if (fitnessGoal === "muscle_gain") {
 		bmr += 500; // Calorie surplus
 	}
 	// if maintaining weight, no adjustment is needed
-
-	if (exerciseFrequency === "never") {
-		bmr -= 200; // Calorie deficit for no exercise
-	} else if (exerciseFrequency === "1-2 times a week") {
-		bmr -= 100; // Calorie deficit for light exercise
-	} else if (exerciseFrequency === "3-4 times a week") {
-		bmr += 100; // Calorie surplus for moderate exercise
-	} else if (exerciseFrequency === "5-6 times a week") {
-		bmr += 200; // Calorie surplus for heavy exercise
-	}
 
 	return Math.round(bmr);
 }
