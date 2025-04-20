@@ -61,8 +61,9 @@ export async function action({request}: Route.ActionArgs) {
 }
 
 export default function CalculateRoute({actionData}: Route.ComponentProps) {
+	// className="flex flex-col items-center justify-center pt-16 pb-4"
 	return (
-		<main className="flex flex-col items-center justify-center pt-16 pb-4">
+		<>
 			<Toaster position="top-right" />
 			<div className="mb-5 flex flex-col gap-1">
 				<H1>Nutrition Calculator</H1>
@@ -75,6 +76,6 @@ export default function CalculateRoute({actionData}: Route.ComponentProps) {
 					<ErrorAlert actionData={actionData} />
 				</div>
 			</div>
-		</main>
+		</>
 	);
 }

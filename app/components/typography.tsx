@@ -96,9 +96,7 @@ export function InlineCode({className, children}: PropsWithChildren<Props>) {
 
 export function Lead({className, children}: PropsWithChildren<Props>) {
 	return (
-		<p className={cn("text-muted-foreground text-xl", className)}>
-			{children}a response.
-		</p>
+		<p className={cn("text-muted-foreground text-xl", className)}>{children}</p>
 	);
 }
 
