@@ -14,5 +14,13 @@
   "typescript.preferences.autoImportFileExcludePatterns": [
     "@radix-ui/*",
     "drizzle-orm/mysql-core"
-  ]
+  ],
+  "[typescript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "typescript.suggest.autoImports": true,
+  "typescript.suggest.completeFunctionCalls": true,
 }
