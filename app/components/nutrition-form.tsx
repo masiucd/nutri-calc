@@ -29,11 +29,6 @@ export function NutritionForm() {
 					isPending && "opacity-50",
 				)}
 			>
-				<legend className="mb-5 rounded-sm bg-foreground p-1 text-accent">
-					<h2>Nutrition Calculator</h2>
-					<p>Calculate your daily nutritional needs</p>
-				</legend>
-
 				<div className="flex flex-col">
 					<span className="mb-3 flex gap-1">
 						<UserIcon className="text-foreground-500" /> Fitness Profile

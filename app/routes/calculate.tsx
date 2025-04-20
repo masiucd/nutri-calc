@@ -68,7 +68,7 @@ export default function CalculateRoute({actionData}: Route.ComponentProps) {
 				<H1>Nutrition Calculator</H1>
 				<Lead>Calculate your daily nutritional needs</Lead>
 			</div>
-			<div>
+			<div className="w-full max-w-2xl px-4 py-2">
 				<NutritionForm />
 				<div>
 					<ResultAlert actionData={actionData} />
