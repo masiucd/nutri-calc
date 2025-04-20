@@ -31,6 +31,10 @@
 			"nursery": {
 				"useSortedClasses": "error"
 			},
+			"suspicious": {
+				"noConsole": "warn",
+				"noEmptyInterface": "error"
+			},
 			"correctness": {
 				"useJsxKeyInIterable": "error",
 				"noUnusedImports": "error",
