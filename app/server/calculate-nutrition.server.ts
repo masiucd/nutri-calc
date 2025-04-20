@@ -29,16 +29,11 @@ export function calculateNutritionalNeeds({
 	let h = updateHeightBasedOnUnit(height, heightUnit);
 
 	// Calculate BMR using Mifflin-St Jeor Equation
-	let bmr = calculateBmr({ gender, age, w, h, activityLevel });
-
-	// Adjust BMR based on fitness goal
-	if (fitnessGoal === "weight_loss") {
-		bmr -= 500; // Calorie deficit
-	} else if (fitnessGoal === "muscle_gain") {
-		bmr += 500; // Calorie surplus
-	}
-	// if maintaining weight, no adjustment is needed
-	return Math.round(bmr);
+	let bmr = bmrBasedOnFitnessGoal(
+		calculateBmr({gender, age, w, h}),
+		fitnessGoal,
+	);
+	return bmrToTdee(bmr, activityLevel);
 }
 
 function updateWeightBasedOnUnit(
@@ -48,8 +43,25 @@ function updateWeightBasedOnUnit(
 	if (weightUnit === "kg") {
 		return weight;
 	}
-	// if (weightUnit === "lb")
+
 	return weight * 0.453592; // Convert lb to kg
+}
+
+function bmrBasedOnFitnessGoal(bmr: number, fitnessGoal: FitnessGoal): number {
+	if (fitnessGoal === "weight_loss") {
+		return bmr - 500; // Calorie deficit
+	}
+	if (fitnessGoal === "muscle_gain") {
+		return bmr + 500; // Calorie surplus
+	}
+	if (fitnessGoal === "maintenance") {
+		return bmr; // Maintenance
+	}
+	return bmr;
+}
+
+function bmrToTdee(bmr: number, activityLevel: ActivityLevel): number {
+	return Math.round(bmr * activityMultiplier[activityLevel]);
 }
 
 function updateHeightBasedOnUnit(
@@ -63,28 +75,27 @@ function updateHeightBasedOnUnit(
 	return height * 2.54; // Convert in to cm
 }
 
+function getBaseBmr({w, h, age}: {w: number; h: number; age: number}) {
+	return 10 * w + 6.25 * h - 5 * age;
+}
+// Mifflin-St Jeor Equation
 function calculateBmr({
 	gender,
 	age,
 	w,
 	h,
-	activityLevel,
 }: {
 	gender: GenderType;
 	age: number;
 	w: number;
 	h: number;
-	activityLevel: ActivityLevel;
 }) {
-	let bmr = 0;
+	let bmr = getBaseBmr({w, h, age});
 	if (gender === "male") {
-		bmr = 10 * w + 6.25 * h - 5 * age + 5;
+		bmr += 5;
 	} else if (gender === "female") {
-		bmr = 10 * w + 6.25 * h - 5 * age - 161;
+		bmr -= 161;
 	}
-	// if (gender === "female")
-
-	bmr *= activityMultiplier[activityLevel];
 	return bmr;
 }
 

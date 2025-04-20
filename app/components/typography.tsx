@@ -39,7 +39,7 @@ export function H3({className, children}: PropsWithChildren<Props>) {
 				className,
 			)}
 		>
-			The Joke Tax
+			{children}
 		</h3>
 	);
 }
