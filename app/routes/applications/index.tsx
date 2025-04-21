@@ -4,7 +4,6 @@ import {H1, Lead} from "~/components/typography";
 import {Toaster} from "~/components/ui/sonner";
 import {calculateNutritionalNeeds} from "~/server/calculate-nutrition.server";
 import {CalculateSchema} from "~/server/schemas/calculate";
-import type {Route} from "./+types/calculate";
 
 export function meta({params}: Route.MetaArgs) {
 	return [

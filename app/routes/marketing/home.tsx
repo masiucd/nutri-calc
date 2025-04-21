@@ -1,5 +1,6 @@
 import {Link} from "react-router";
 import {Icons} from "~/components/icons";
+import {PageWrapper} from "~/components/page-wrapper";
 import {H1, Lead} from "~/components/typography";
 
 export function meta() {
@@ -14,7 +15,7 @@ export function meta() {
 
 export default function Home() {
 	return (
-		<>
+		<PageWrapper>
 			<div className="mb-5">
 				<H1>Welcome to Nutri Calc</H1>
 				<Lead>
@@ -30,6 +31,6 @@ export default function Home() {
 				<Icons.Calculator />
 				<span>Calculate your daily nutritional needs</span>
 			</Link>
-		</>
+		</PageWrapper>
 	);
 }
