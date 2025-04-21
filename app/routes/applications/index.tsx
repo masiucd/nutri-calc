@@ -1,6 +1,5 @@
 import {ErrorAlert, ResultAlert} from "~/components/alerts";
 import {NutritionForm} from "~/components/nutrition-form";
-import {H1, Lead} from "~/components/typography";
 import {Toaster} from "~/components/ui/sonner";
 import {calculateNutritionalNeeds} from "~/server/calculate-nutrition.server";
 import {CalculateSchema} from "~/server/schemas/calculate";
@@ -61,14 +60,10 @@ export async function action({request}: Route.ActionArgs) {
 }
 
 export default function CalculateRoute({actionData}: Route.ComponentProps) {
-	// className="flex flex-col items-center justify-center pt-16 pb-4"
 	return (
 		<>
 			<Toaster position="top-right" />
-			<div className="mb-5 flex flex-col gap-1">
-				<H1>Nutrition Calculator</H1>
-				<Lead>Calculate your daily nutritional needs</Lead>
-			</div>
+
 			<div className="w-full max-w-2xl px-4 py-2">
 				<NutritionForm />
 				<div>
