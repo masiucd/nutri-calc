@@ -10,6 +10,10 @@ export default [
 		index("routes/marketing/home.tsx"),
 		//
 	]),
-	...prefix("/calculate", [index("routes/applications/index.tsx")]),
+	...prefix("/calculate", [
+		layout("routes/applications/layout.tsx", [
+			index("routes/applications/index.tsx"),
+		]),
+	]),
 	// route("/calculate", "routes/calculate.tsx"),
 ] satisfies RouteConfig;
