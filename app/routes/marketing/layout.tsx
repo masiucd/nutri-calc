@@ -5,15 +5,17 @@ export default function MarketingLayout() {
 		<BaseLayout
 			header={
 				<header>
-					<div className="h-16">
-						<strong>Header</strong>
+					<div className="container mx-auto flex h-16 items-center">
+						<strong>Nutri Calc</strong>
 					</div>
 				</header>
 			}
 			footer={
 				<footer>
-					<div className="h-16">
-						<strong>Footer</strong>
+					<div className="container mx-auto flex h-16 items-center">
+						<small className="text-gray-500 text-sm">
+							&copy; {new Date().getFullYear()} Nutri Calc. All rights reserved.
+						</small>
 					</div>
 				</footer>
 			}
