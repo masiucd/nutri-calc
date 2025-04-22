@@ -6,12 +6,7 @@ export function PageWrapper({
 	className,
 }: PropsWithChildren<{className?: string}>) {
 	return (
-		<div
-			className={cn(
-				"flex w-full max-w-6xl flex-1 flex-col bg-blue-200",
-				className,
-			)}
-		>
+		<div className={cn("flex w-full max-w-6xl flex-1 flex-col", className)}>
 			{children}
 		</div>
 	);

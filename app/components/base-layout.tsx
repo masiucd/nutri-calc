@@ -1,4 +1,4 @@
-import type {ReactNode} from "react";
+import type {PropsWithChildren, ReactNode} from "react";
 import {Outlet} from "react-router";
 import {cn} from "~/lib/utils";
 
@@ -8,7 +8,12 @@ type Props = {
 	footer?: ReactNode | null;
 };
 
-export function BaseLayout({className, header = null, footer = null}: Props) {
+export function BaseLayout({
+	className,
+	children,
+	header = null,
+	footer = null,
+}: PropsWithChildren<Props>) {
 	return (
 		<>
 			{header}
@@ -18,6 +23,7 @@ export function BaseLayout({className, header = null, footer = null}: Props) {
 					className,
 				)}
 			>
+				{children}
 				<Outlet />
 			</main>
 			{footer}
