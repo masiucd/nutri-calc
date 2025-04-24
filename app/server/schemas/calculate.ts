@@ -43,6 +43,5 @@ export let CalculateSchema = z.object({
 	height: z.string().regex(/^\d+$/, "Height must be a number"),
 	height_unit: HeightUnit,
 	activity_level: ActivityLevel,
-
 	fitness_goal: FitnessGoal,
 });
