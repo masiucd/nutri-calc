@@ -21,3 +21,6 @@ Application is ina **WIP** state, so please be patient with any bugs or issues y
 - [React](https://react.dev/)
 - [Shadcn/ui](https://ui.shadcn.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
+- [Zod](https://zod.dev/)
+- [Motion](https://motion.dev/)
+- [Motion-Primitives](https://motion-primitives.com/docs)
