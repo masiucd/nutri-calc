@@ -10,11 +10,11 @@ export default function ApplicationsLayout() {
 					<div className="container mx-auto flex h-32 items-center">
 						<Link
 							to="/"
-							aria-description="Back to Marketing"
-							className="underline underline-offset-2 duration-150 hover:opacity-50"
+							aria-description="Back to The Home Page"
+							className="underline underline-offset-2 transition-all duration-150 hover:opacity-50"
 						>
 							<strong className="flex items-center gap-2">
-								<Icons.MoveLeft /> Back to Marketing
+								<Icons.MoveLeft /> Back to Home
 							</strong>
 						</Link>
 					</div>

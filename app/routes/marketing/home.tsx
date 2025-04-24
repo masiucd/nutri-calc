@@ -1,5 +1,6 @@
 import {Link} from "react-router";
 import {Icons} from "~/components/icons";
+import {TextShimmerWave} from "~/components/motion-primitives/text-shimmer-wave";
 import {PageWrapper} from "~/components/page-wrapper";
 import {H1, Lead} from "~/components/typography";
 
@@ -29,7 +30,16 @@ export default function Home() {
 				aria-description="Calculate your daily nutritional needs"
 			>
 				<Icons.Calculator />
-				<span>Calculate your daily nutritional needs</span>
+				<TextShimmerWave
+					className="[--base-color:#333] [--base-gradient-color:#5EB1EF]"
+					duration={2}
+					spread={3}
+					zDistance={1}
+					scaleDistance={1.1}
+					rotateYDistance={10}
+				>
+					Calculate your daily nutritional needs
+				</TextShimmerWave>
 			</Link>
 		</PageWrapper>
 	);
