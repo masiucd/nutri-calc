@@ -3,8 +3,8 @@ import {NutritionForm} from "~/components/nutrition-form";
 import {PageWrapper} from "~/components/page-wrapper";
 import {H1, Lead} from "~/components/typography";
 import {Toaster} from "~/components/ui/sonner";
-import {calculateNutritionalNeeds} from "~/server/calculate-nutrition.server";
-import {CalculateSchema} from "~/server/schemas/calculate";
+
+import {calculateHandler} from "~/server/handlers/calculate";
 import type {Route} from "./+types";
 
 export function meta({params}: Route.MetaArgs) {
@@ -19,47 +19,10 @@ export function meta({params}: Route.MetaArgs) {
 
 export async function action({request}: Route.ActionArgs) {
 	let data = await request.formData();
-	let parsedData = CalculateSchema.safeParse(Object.fromEntries(data));
-	if (parsedData.success) {
-		let {
-			weight,
-			height,
-			weight_unit,
-			height_unit,
-			gender,
-			age,
-			activity_level,
-			fitness_goal,
-		} = parsedData.data;
-		let calculatedData = calculateNutritionalNeeds({
-			weight: Number.parseFloat(weight),
-			height: Number.parseFloat(height),
-			weightUnit: weight_unit,
-			heightUnit: height_unit,
-			gender,
-			age: Number.parseInt(age),
-			activityLevel: activity_level,
-
-			fitnessGoal: fitness_goal,
-		});
-		return {
-			data: {
-				calculatedData,
-				weight: Number.parseFloat(weight),
-				height: Number.parseFloat(height),
-				weightUnit: weight_unit,
-				heightUnit: height_unit,
-				gender,
-			},
-			errors: null,
-		};
-	}
-
-	return {
-		errors: parsedData.error.format(),
-		data: null,
-	};
+	return calculateHandler(data);
 }
+
+export type CalculateAction = Route.ComponentProps["actionData"];
 
 export default function CalculateRoute({actionData}: Route.ComponentProps) {
 	return (

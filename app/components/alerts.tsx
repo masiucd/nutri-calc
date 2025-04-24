@@ -10,7 +10,7 @@ import {
 	recommendedFats,
 	recommendedProtein,
 } from "~/lib/recommended-macros";
-import type {Route} from "../routes/+types/calculate";
+import type {CalculateAction} from "~/routes/applications";
 
 function AlertWrapper({children}: PropsWithChildren) {
 	return (
@@ -25,9 +25,7 @@ function AlertWrapper({children}: PropsWithChildren) {
 	);
 }
 
-export function ErrorAlert({
-	actionData,
-}: Pick<Route.ComponentProps, "actionData">) {
+export function ErrorAlert({actionData}: {actionData: CalculateAction}) {
 	return (
 		<AnimatePresence>
 			{actionData?.errors && (
@@ -50,9 +48,7 @@ export function ErrorAlert({
 	);
 }
 
-export function ResultAlert({
-	actionData,
-}: Pick<Route.ComponentProps, "actionData">) {
+export function ResultAlert({actionData}: {actionData: CalculateAction}) {
 	return (
 		<AnimatePresence>
 			{actionData?.data && (
