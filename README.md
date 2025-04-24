@@ -13,9 +13,7 @@ Application is ina **WIP** state, so please be patient with any bugs or issues y
 - Calculates daily calorie intake based on user input
 - Displays macronutrient breakdown (carbohydrates, proteins, fats)
 - Provides a summary of the results
-- Responsive design for mobile and desktop devices
-- Easy to use and navigate
-- Clear and organized display of results
+- Copy to clipboard functionality for easy sharing
 
 ## Technologies Used
 
