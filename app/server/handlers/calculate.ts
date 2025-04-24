@@ -17,11 +17,6 @@ export function calculateHandler(data: FormData) {
 	};
 }
 
-export type processNutritionalDataType = ReturnType<
-	typeof processNutritionalData
->;
-export type ReturnTypeCalculateHandler = ReturnType<typeof calculateHandler>;
-
 function processNutritionalData(parsedData: z.infer<typeof CalculateSchema>) {
 	let {
 		weight,
