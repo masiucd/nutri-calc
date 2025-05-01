@@ -2,7 +2,8 @@ import {Link} from "react-router";
 import {A} from "~/components/a";
 import {PageWrapper} from "~/components/page-wrapper";
 import {MathPi} from "~/components/svgs/math";
-import {H1, H2, H3, Lead} from "~/components/typography";
+import {H1, H2, H3, Lead, P} from "~/components/typography";
+import {cn} from "~/lib/utils";
 
 export function meta() {
 	return [
@@ -56,7 +57,7 @@ export default function HomeRoute() {
 			</section>
 			<section className="my-10">
 				<div className="container mx-auto flex flex-col items-center gap-2 py-20">
-					<div className="flex flex-col items-center">
+					<div className="mb-5 flex flex-col items-center">
 						<H2>Features</H2>
 						<Lead className="text-pretty">
 							Our calorie calculator provides everything you need to track and
@@ -64,7 +65,13 @@ export default function HomeRoute() {
 						</Lead>
 					</div>
 					<div className="flex gap-10">
-						<div className="size-64 bg-gray-600 shadow-md" />
+						<Box
+							title="Accurate Calculations"
+							description="Based on scientific formulas"
+							content="Our calculator uses proven scientific methods to determine your daily caloric needs with precision."
+							cta="Try Now"
+							to="/calculate"
+						/>
 						<div className="size-64 bg-gray-600 shadow-md" />
 						<div className="size-64 bg-gray-600 shadow-md" />
 					</div>
@@ -89,5 +96,38 @@ export default function HomeRoute() {
 				</div>
 			</section>
 		</PageWrapper>
+	);
+}
+
+function Box({
+	className,
+	title,
+	description,
+	content,
+	cta,
+	to,
+}: {
+	className?: string;
+	title: string;
+	description: string;
+	content: string;
+	cta: string;
+	to: string;
+}) {
+	return (
+		<div className={cn("size-68 rounded-md p-2 shadow-md", className)}>
+			<div className="flex flex-col justify-center gap-1">
+				<H3>{title}</H3>
+				<P className="text-foreground/50 text-sm leading-7 [&:not(:first-child)]:mt-0">
+					{description}
+				</P>
+			</div>
+			<div className="mt-5 flex flex-col gap-2">
+				<P>{content}</P>
+				<A className="w-fit text-app text-sm" to={to}>
+					{cta}
+				</A>
+			</div>
+		</div>
 	);
 }
