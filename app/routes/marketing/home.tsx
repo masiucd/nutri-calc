@@ -1,5 +1,7 @@
 import {Link} from "react-router";
+import {A} from "~/components/a";
 import {PageWrapper} from "~/components/page-wrapper";
+import {MathPi} from "~/components/svgs/math";
 import {H1, H2, H3, Lead} from "~/components/typography";
 
 export function meta() {
@@ -12,13 +14,13 @@ export function meta() {
 	];
 }
 
-export default function Home() {
+export default function HomeRoute() {
 	return (
 		<PageWrapper fluid>
-			<section className="flex flex-1 items-center border-3 border-pink-400 bg-green-300/20">
-				<div className="flex flex-col gap-2 border border-green-400 flex-1 md:pr-20">
-					<div className="border border-blue-500 space-y-1">
-						<H1 className="text-pretty">
+			<section className="mb-10 flex flex-1 items-center rounded-md bg-app/20 py-50 shadow-sm">
+				<div className="flex flex-1 flex-col gap-2 md:pr-20 md:pl-5">
+					<div className="space-y-1">
+						<H1 className="text-pretty ">
 							Track Your Calories, Achieve Your Goals
 						</H1>
 						<Lead className="text-balance">
@@ -28,9 +30,8 @@ export default function Home() {
 						</Lead>
 					</div>
 					<div className="flex gap-5">
-						<Link
+						<A
 							to="/calculate"
-							className="flex items-center gap-2 underline underline-offset-2 duration-150 hover:text-blue-500 hover:opacity-45"
 							aria-description="Calculate your daily nutritional needs"
 						>
 							{/* <TextShimmerWave
@@ -43,22 +44,18 @@ export default function Home() {
 							> */}
 							Calculate your daily nutritional needs
 							{/* </TextShimmerWave> */}
-						</Link>
-						<Link
-							to="/about"
-							className="flex items-center gap-2 underline underline-offset-2 duration-150 hover:text-blue-500 hover:opacity-45"
-							aria-description="Learn more about us"
-						>
+						</A>
+						<A to="/about" aria-description="Learn more about us">
 							Learn More
-						</Link>
+						</A>
 					</div>
 				</div>
-				<div className="flex-1 border border-orange-400">
-					<div className="size-96 bg-foreground/30" />
+				<div className="flex-1 rounded-md bg-gray-400/40 shadow-sm">
+					<MathPi />
 				</div>
 			</section>
 			<section className="my-10">
-				<div className="container mx-auto gap-2 border border-purple-500 flex flex-col  items-center">
+				<div className="container mx-auto flex flex-col items-center gap-2 py-20">
 					<div className="flex flex-col items-center">
 						<H2>Features</H2>
 						<Lead className="text-pretty">
@@ -73,20 +70,22 @@ export default function Home() {
 					</div>
 				</div>
 			</section>
-			<section className="bg-green-300/20">
-				<div>
-					<H3>Ready to Get Started?</H3>
-					<Lead>
-						Join thousands of users who have transformed their health with Take
-						the first step toward your health and fitness goals today.
-					</Lead>
-					<Link
-						to="/calculate"
-						className="flex items-center gap-2 underline underline-offset-2 duration-150 hover:text-blue-500 hover:opacity-45"
-						aria-description="Calculate your daily nutritional needs"
-					>
-						Calculate your daily nutritional needs
-					</Link>
+			<section className="bg-app/20">
+				<div className="flex justify-center py-20">
+					<div className="flex flex-col items-center justify-center gap-2 border-2 sm:max-w-2xl">
+						<H3>Ready to Get Started? </H3>
+						<Lead className="text-balance">
+							Join thousands of users who have transformed their health with
+							Take the first step toward your health and fitness goals today.
+						</Lead>
+						<Link
+							to="/calculate"
+							className="flex items-center gap-2 underline underline-offset-2 duration-150 hover:text-blue-500 hover:opacity-45"
+							aria-description="Calculate your daily nutritional needs"
+						>
+							Calculate your daily nutritional needs
+						</Link>
+					</div>
 				</div>
 			</section>
 		</PageWrapper>
