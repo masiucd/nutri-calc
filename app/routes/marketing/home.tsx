@@ -99,15 +99,16 @@ function MiddleWithCards() {
 
 					<Box>
 						<Box.title>
-							<H3>Accurate Calculations</H3>
+							<H3>Personalized Results</H3>
 							<P className="text-foreground/50 text-sm leading-7 [&:not(:first-child)]:mt-0">
-								Based on scientific formulas
+								Customized to your goals
 							</P>
 						</Box.title>
 						<Box.content>
 							<P>
-								Our calculator uses proven scientific methods to determine your
-								daily caloric needs with precision.
+								Whether you want to lose weight, gain muscle, or maintain your
+								current weight, our calculator tailors results to your specific
+								goals.
 							</P>
 							<A className="w-fit text-app text-sm" to="/calculate">
 								Try Now
@@ -117,15 +118,15 @@ function MiddleWithCards() {
 
 					<Box>
 						<Box.title>
-							<H3>Accurate Calculations</H3>
+							<H3>User-Friendly Interface</H3>
 							<P className="text-foreground/50 text-sm leading-7 [&:not(:first-child)]:mt-0">
-								Based on scientific formulas
+								Easy to navigate and understand
 							</P>
 						</Box.title>
 						<Box.content>
 							<P>
-								Our calculator uses proven scientific methods to determine your
-								daily caloric needs with precision.
+								Our intuitive design ensures that you can quickly and easily
+								navigate the calculator, making it accessible for everyone.
 							</P>
 							<A className="w-fit text-app text-sm" to="/calculate">
 								Try Now
