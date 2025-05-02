@@ -6,6 +6,7 @@ import {
 	Copy,
 	Mail,
 	MoveLeft,
+	Quote,
 	ShieldCheck,
 	TriangleAlert,
 	Users,
@@ -27,4 +28,5 @@ export const Icons = {
 	ShieldCheck: (props: Props) => <ShieldCheck size={20} {...props} />,
 	Activity: (props: Props) => <Activity size={20} {...props} />,
 	Mail: (props: Props) => <Mail size={20} {...props} />,
+	Quote: (props: Props) => <Quote size={20} {...props} />,
 } as const;
