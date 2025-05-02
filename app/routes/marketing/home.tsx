@@ -143,7 +143,7 @@ function Bottom() {
 	return (
 		<section className="bg-app/20">
 			<div className="flex justify-center py-20">
-				<div className="flex flex-col items-center justify-center gap-2 border-2 sm:max-w-2xl">
+				<div className="flex flex-col items-center justify-center gap-2 sm:max-w-2xl">
 					<H3>Ready to Get Started? </H3>
 					<Lead className="text-balance">
 						Join thousands of users who have transformed their health with Take
