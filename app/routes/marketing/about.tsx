@@ -1,6 +1,7 @@
 import {Icons} from "~/components/icons";
 import {PageWrapper} from "~/components/page-wrapper";
 import {H1, H2, H3, H4, Lead, P} from "~/components/typography";
+import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
 
 export default function AboutRoute() {
 	return (
@@ -88,7 +89,11 @@ export default function AboutRoute() {
 						fitness goals.
 					</Lead>
 				</div>
-				<div className="size-60 bg-gray-800 shadow-md" />
+				<div className="flex justify-between gap-5">
+					<ReviewBox />
+					<ReviewBox />
+					<ReviewBox />
+				</div>
 			</section>
 			<section>
 				<div>
@@ -107,5 +112,24 @@ export default function AboutRoute() {
 				<form>{/*  */}</form>
 			</section>
 		</PageWrapper>
+	);
+}
+
+function ReviewBox() {
+	return (
+		<div className="size-80 rounded-md shadow-md">
+			<Icons.Quote className="text-app" size={30} />
+			<div className="flex items-center gap-2">
+				<Avatar className="size-10">
+					<AvatarImage src="https://github.com/masiucd.png" alt="@masiucd" />
+					<AvatarFallback>MCD</AvatarFallback>
+				</Avatar>
+
+				<div>
+					<span className="block font-semibold">Marcell Ciszek Druzunski</span>
+					<span className="block text-foreground/60">Soft ware developer</span>
+				</div>
+			</div>
+		</div>
 	);
 }
