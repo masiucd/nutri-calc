@@ -1,8 +1,7 @@
-import {Link} from "react-router";
 import {A} from "~/components/a";
 import {PageWrapper} from "~/components/page-wrapper";
 import {MathPi} from "~/components/svgs/math";
-import {H1, H2, H3, Lead, P} from "~/components/typography";
+import {H1, H2, Lead, P} from "~/components/typography";
 import {
 	Card,
 	CardContent,
@@ -34,7 +33,7 @@ export default function HomeRoute() {
 
 function TopWithHero() {
 	return (
-		<section className="mb-10 flex flex-1 items-center rounded-md bg-app/20 py-50 shadow-sm">
+		<section className="mb-10 flex flex-1 items-center rounded-md bg-app/10 py-50 shadow-sm">
 			<div className="container mx-auto flex items-center justify-between">
 				<div className="flex flex-1 flex-col gap-2 md:pr-20 md:pl-5">
 					<div className="space-y-1">
@@ -52,16 +51,7 @@ function TopWithHero() {
 							to="/calculate"
 							aria-description="Calculate your daily nutritional needs"
 						>
-							{/* <TextShimmerWave
-					className="[--base-color:#333] [--base-gradient-color:#5EB1EF]"
-					duration={2}
-					spread={3}
-					zDistance={1}
-					scaleDistance={1.1}
-					rotateYDistance={10}
-				> */}
 							Calculate your daily nutritional needs
-							{/* </TextShimmerWave> */}
 						</A>
 						<A to="/about" aria-description="Learn more about us">
 							Learn More
@@ -87,64 +77,28 @@ function MiddleWithCards() {
 						manage your nutrition.
 					</Lead>
 				</div>
-				<div className="flex gap-10">
-					<Card>
-						<CardHeader>
-							<CardTitle>Features</CardTitle>
-							<CardDescription>
-								Our calorie calculator provides everything you need to track and
-								manage your nutrition.
-							</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<P>
-								Our calculator uses proven scientific methods to determine your
-								daily caloric needs with precision.
-							</P>
-						</CardContent>
-						<CardFooter>
-							<A className="w-fit text-app text-sm" to="/calculate">
-								Try Now
-							</A>
-						</CardFooter>
-					</Card>
-
-					<Card>
-						<CardHeader>
-							<CardTitle>Personalized Results</CardTitle>
-							<CardDescription>Customized to your goals</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<P>
-								Whether you want to lose weight, gain muscle, or maintain your
-								current weight, our calculator tailors results to your specific
-								goals.
-							</P>
-						</CardContent>
-						<CardFooter>
-							<A className="w-fit text-app text-sm" to="/calculate">
-								Try Now
-							</A>
-						</CardFooter>
-					</Card>
-
-					<Card>
-						<CardHeader>
-							<CardTitle>User-Friendly Interface</CardTitle>
-							<CardDescription>Easy to navigate and understand</CardDescription>
-						</CardHeader>
-						<CardContent>
-							<P>
-								Our intuitive design ensures that you can quickly and easily
-								navigate the calculator, making it accessible for everyone.
-							</P>
-						</CardContent>
-						<CardFooter>
-							<A className="w-fit text-app text-sm" to="/calculate">
-								Try Now
-							</A>
-						</CardFooter>
-					</Card>
+				<div className="flex justify-between gap-10">
+					<FeatureCard
+						title="Privacy First"
+						description="Your data is safe with us"
+						content="We prioritize your privacy. Your data is never shared or sold."
+						linkText="Learn More"
+						linkTo="/about"
+					/>
+					<FeatureCard
+						title="Community Support"
+						description="Join our community"
+						content="Connect with others on similar journeys and share tips."
+						linkText="Join Now"
+						linkTo="/about"
+					/>
+					<FeatureCard
+						title="Mobile Friendly"
+						description="Access anywhere, anytime"
+						content="Our calculator is optimized for mobile devices, so you can track your nutrition on the go."
+						linkText="Try Now"
+						linkTo="/calculate"
+					/>
 				</div>
 			</div>
 		</section>
@@ -153,23 +107,52 @@ function MiddleWithCards() {
 
 function Bottom() {
 	return (
-		<section className="bg-app/20">
+		<section className="bg-app/10">
 			<div className="flex justify-center py-20">
 				<div className="flex flex-col items-center justify-center gap-2 sm:max-w-2xl">
-					<H3>Ready to Get Started? </H3>
-					<Lead className="text-balance">
+					<Lead className="text-center">
 						Join thousands of users who have transformed their health with Take
 						the first step toward your health and fitness goals today.
 					</Lead>
-					<Link
+					<A
 						to="/calculate"
-						className="flex items-center gap-2 underline underline-offset-2 duration-150 hover:text-blue-500 hover:opacity-45"
 						aria-description="Calculate your daily nutritional needs"
 					>
 						Calculate your daily nutritional needs
-					</Link>
+					</A>
 				</div>
 			</div>
 		</section>
+	);
+}
+
+function FeatureCard({
+	title,
+	description,
+	content,
+	linkText,
+	linkTo,
+}: {
+	title: string;
+	description: string;
+	content: string;
+	linkText: string;
+	linkTo: string;
+}) {
+	return (
+		<Card className="flex-1">
+			<CardHeader>
+				<CardTitle>{title}</CardTitle>
+				<CardDescription>{description}</CardDescription>
+			</CardHeader>
+			<CardContent>
+				<P>{content}</P>
+			</CardContent>
+			<CardFooter className="mt-auto flex items-center gap-2">
+				<A className="w-fit text-app text-sm" to={linkTo}>
+					{linkText}
+				</A>
+			</CardFooter>
+		</Card>
 	);
 }
