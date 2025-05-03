@@ -1,4 +1,5 @@
 import {Link} from "react-router";
+import {A} from "~/components/a";
 import {BaseLayout} from "~/components/base-layout";
 
 let navItems = [
@@ -25,12 +26,7 @@ export default function MarketingLayout() {
 							<ul className="flex gap-2">
 								{navItems.map(({name, to}) => (
 									<li key={name} className="capitalize">
-										<Link
-											className="relative after:absolute after:bottom-0 after:left-0 after:h-1 after:w-0 after:bg-app/30 after:transition-all after:duration-200 after:content-[''] hover:opacity-80 hover:after:w-full"
-											to={to}
-										>
-											{name}
-										</Link>
+										<A to={to}>{name}</A>
 									</li>
 								))}
 							</ul>
