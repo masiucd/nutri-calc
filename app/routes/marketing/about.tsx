@@ -1,4 +1,6 @@
 import type {PropsWithChildren} from "react";
+import {Form} from "react-router";
+import {z} from "zod";
 import {Icons} from "~/components/icons";
 import {PageWrapper} from "~/components/page-wrapper";
 import {H1, H2, H3, Lead, P} from "~/components/typography";
@@ -21,8 +23,40 @@ import {Input} from "~/components/ui/input";
 import {Label} from "~/components/ui/label";
 import {Textarea} from "~/components/ui/textarea";
 import {cn} from "~/lib/utils";
+import type {Route} from "./+types/about";
 
-export default function AboutRoute() {
+let formSchema = z.object({
+	name: z.string().min(2, {message: "Name is required"}),
+	email: z.string().email({message: "Invalid email address"}),
+	subject: z.string().min(3, {message: "Subject is required"}),
+	message: z.string().min(10, {message: "Message is required"}),
+});
+
+export async function action({request}: Route.ActionArgs) {
+	let formData = await request.formData();
+	let form = Object.fromEntries(formData.entries());
+	console.log("form", form);
+	let result = formSchema.safeParse(form);
+	console.log("result", result);
+	if (!result.success) {
+		let errors = result.error.flatten().fieldErrors;
+
+		console.log("errors", errors, result.error);
+		return {
+			status: 400,
+			errors: errors,
+		};
+	}
+	// // Handle the form submission
+	// console.log("Form submitted successfully", result.data);
+	return {
+		status: 200,
+		message: "Form submitted successfully",
+	};
+}
+
+export default function AboutRoute({actionData}: Route.ComponentProps) {
+	console.log("actionData", actionData);
 	return (
 		<PageWrapper className="gap-30">
 			<Title />
@@ -58,52 +92,7 @@ export default function AboutRoute() {
 					<H3>Get In Touch</H3>
 					<Lead>Have questions or feedback? We'd love to hear from you.</Lead>
 				</div>
-				<Card className="mt-5 w-full max-w-3xl">
-					<CardHeader>
-						<CardTitle className="flex items-center gap-2">
-							<Icons.Mail className="text-app" /> Contact Us
-						</CardTitle>
-					</CardHeader>
-					<form>
-						<fieldset className="space-y-6 p-5">
-							<div className="flex gap-10">
-								<div className="grid w-full items-center gap-1.5">
-									<Label htmlFor="name">Name</Label>
-									<Input type="text" id="name" placeholder="your name..." />
-								</div>
-								<div className="grid w-full items-center gap-1.5">
-									<Label htmlFor="email">Email</Label>
-									<Input type="email" id="email" placeholder="example@ex.com" />
-								</div>
-							</div>
-							<div className="grid w-full items-center gap-1.5">
-								<Label htmlFor="text">Subject</Label>
-								<Input
-									type="text"
-									id="subject"
-									placeholder="Enter a subject..."
-								/>
-							</div>
-							<div className="grid w-full items-center gap-1.5">
-								<Label htmlFor="message">Message</Label>
-								<Textarea
-									id="message"
-									placeholder="Some message..."
-									className="resize-none"
-									rows={5}
-								/>
-							</div>
-						</fieldset>
-						<div className=" flex justify-center">
-							<Button
-								type="submit"
-								className=" max-w-sm bg-app text-foreground hover:bg-app/80"
-							>
-								Send Message
-							</Button>
-						</div>
-					</form>
-				</Card>
+				<ContactForm />
 			</section>
 		</PageWrapper>
 	);
@@ -299,5 +288,72 @@ export function AboutQuestions() {
 				</AccordionItem>
 			))}
 		</Accordion>
+	);
+}
+
+function ContactForm() {
+	return (
+		<Card className="mt-5 w-full max-w-3xl">
+			<CardHeader>
+				<CardTitle className="flex items-center gap-2">
+					<Icons.Mail className="text-app" /> Contact Us
+				</CardTitle>
+			</CardHeader>
+			<Form method="post">
+				<fieldset className="space-y-6 p-5">
+					<div className="flex gap-10">
+						<div className="grid w-full items-center gap-1.5">
+							<Label htmlFor="name">Name</Label>
+							<Input
+								type="text"
+								id="name"
+								name="name"
+								placeholder="your name..."
+								required
+							/>
+						</div>
+						<div className="grid w-full items-center gap-1.5">
+							<Label htmlFor="email">Email</Label>
+							<Input
+								type="email"
+								id="email"
+								name="email"
+								placeholder="example@ex.com"
+								required
+							/>
+						</div>
+					</div>
+					<div className="grid w-full items-center gap-1.5">
+						<Label htmlFor="text">Subject</Label>
+						<Input
+							type="text"
+							id="subject"
+							name="subject"
+							placeholder="Enter a subject..."
+							required
+						/>
+					</div>
+					<div className="grid w-full items-center gap-1.5">
+						<Label htmlFor="message">Message</Label>
+						<Textarea
+							id="message"
+							placeholder="Some message..."
+							className="resize-none"
+							rows={5}
+							name="message"
+							required
+						/>
+					</div>
+				</fieldset>
+				<div className=" flex justify-center">
+					<Button
+						type="submit"
+						className=" max-w-sm bg-app text-foreground hover:bg-app/80"
+					>
+						Send Message
+					</Button>
+				</div>
+			</Form>
+		</Card>
 	);
 }
