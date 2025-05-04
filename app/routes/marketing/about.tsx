@@ -2,7 +2,14 @@ import type {PropsWithChildren} from "react";
 import {Icons} from "~/components/icons";
 import {PageWrapper} from "~/components/page-wrapper";
 import {H1, H2, H3, Lead, P} from "~/components/typography";
+import {
+	Accordion,
+	AccordionContent,
+	AccordionItem,
+	AccordionTrigger,
+} from "~/components/ui/accordion";
 import {Avatar, AvatarFallback, AvatarImage} from "~/components/ui/avatar";
+import {Button} from "~/components/ui/button";
 import {
 	Card,
 	CardContent,
@@ -10,6 +17,9 @@ import {
 	CardHeader,
 	CardTitle,
 } from "~/components/ui/card";
+import {Input} from "~/components/ui/input";
+import {Label} from "~/components/ui/label";
+import {Textarea} from "~/components/ui/textarea";
 import {cn} from "~/lib/utils";
 
 export default function AboutRoute() {
@@ -30,25 +40,70 @@ export default function AboutRoute() {
 				<div className="flex justify-between gap-5">
 					<ReviewBox description="I was skeptical at first, but this calculator has changed my life. I've lost 20 pounds in 3 months!" />
 					<ReviewBox description="The Mifflin-St Jeor equation is spot on! I finally understand my calorie needs." />
-					{/* <ReviewBox description="I love how easy it is to use. The interface is clean and intuitive." /> */}
 					<ReviewBox description="I appreciate the privacy-first approach. I feel safe using this app." />
 				</div>
 			</section>
-			<section>
-				<div>
+			<section className="flex flex-col items-center justify-center">
+				<div className="mb-10 flex flex-col items-center justify-center">
 					<H3>Frequently Asked Questions</H3>
 					<Lead>
 						Get answers to common questions about calorie counting and
 						nutrition.
 					</Lead>
 				</div>
+				<AboutQuestions />
 			</section>
-			<section>
-				<div>
+			<section className="flex flex-col items-center justify-center">
+				<div className=" flex flex-col items-center justify-center">
 					<H3>Get In Touch</H3>
 					<Lead>Have questions or feedback? We'd love to hear from you.</Lead>
 				</div>
-				<form>{/*  */}</form>
+				<Card className="mt-5 w-full max-w-3xl">
+					<CardHeader>
+						<CardTitle className="flex items-center gap-2">
+							<Icons.Mail className="text-app" /> Contact Us
+						</CardTitle>
+					</CardHeader>
+					<form>
+						<fieldset className="space-y-6 p-5">
+							<div className="flex gap-10">
+								<div className="grid w-full items-center gap-1.5">
+									<Label htmlFor="name">Name</Label>
+									<Input type="text" id="name" placeholder="your name..." />
+								</div>
+								<div className="grid w-full items-center gap-1.5">
+									<Label htmlFor="email">Email</Label>
+									<Input type="email" id="email" placeholder="example@ex.com" />
+								</div>
+							</div>
+							<div className="grid w-full items-center gap-1.5">
+								<Label htmlFor="text">Subject</Label>
+								<Input
+									type="text"
+									id="subject"
+									placeholder="Enter a subject..."
+								/>
+							</div>
+							<div className="grid w-full items-center gap-1.5">
+								<Label htmlFor="message">Message</Label>
+								<Textarea
+									id="message"
+									placeholder="Some message..."
+									className="resize-none"
+									rows={5}
+								/>
+							</div>
+						</fieldset>
+						<div className=" flex justify-center">
+							<Button
+								type="submit"
+								className=" max-w-sm bg-app text-foreground hover:bg-app/80"
+							>
+								Send Message
+							</Button>
+						</div>
+					</form>
+				</Card>
 			</section>
 		</PageWrapper>
 	);
@@ -198,5 +253,51 @@ function AboutCard({
 			</CardHeader>
 			<CardContent>{children}</CardContent>
 		</Card>
+	);
+}
+
+const accordionItems = [
+	{
+		title: "How accurate is calorie counting for weight loss?",
+		content:
+			"Calorie counting is a useful tool for weight loss, but it's not the only factor. It provides a good estimate of your energy needs, but individual variations in metabolism, activity level, and food choices can affect results.",
+		value: "item-1",
+	},
+
+	{
+		title: "How does the calorie calculator determine my daily needs?",
+		content: `The calculator uses the Mifflin-St Jeor equation to estimate your
+					Basal Metabolic Rate (BMR) based on your personal information
+					(age,sex, weight, height) and then applies an activity multiplier to
+					determine your Total Daily Energy Expenditure (TDEE). Your TDEE is the
+					number of calories you need to maintain your current weight, and you
+					can adjust your intake based on your goals (e.g., weight loss,
+					maintenance, or muscle gain).`,
+		value: "item-2",
+	},
+	{
+		title: "Should I count calories from beverages too?",
+		content:
+			"Yes, it's important to include calories from beverages in your daily intake. Many drinks, especially sugary ones, can contribute a significant number of calories without providing much nutritional value. Be sure to account for all sources of calories to get an accurate picture of your daily intake.",
+		value: "item-3",
+	},
+	{
+		title: "How often should I recalculate my calorie needs?",
+		content:
+			"You should recalculate your calorie needs whenever you experience significant changes in your weight, activity level, or body composition. It's also a good idea to reassess your needs every few months to ensure you are on track with your goals. Regularly updating your calorie needs can help you adjust your intake and maintain progress.",
+		value: "item-4",
+	},
+] as const;
+
+export function AboutQuestions() {
+	return (
+		<Accordion type="single" collapsible className="w-full">
+			{accordionItems.map((item) => (
+				<AccordionItem key={item.value} value={item.value} className="w-full">
+					<AccordionTrigger className="text-lg">{item.title}</AccordionTrigger>
+					<AccordionContent>{item.content}</AccordionContent>
+				</AccordionItem>
+			))}
+		</Accordion>
 	);
 }
