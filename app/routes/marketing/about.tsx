@@ -1,6 +1,5 @@
-import type {PropsWithChildren} from "react";
+import {type PropsWithChildren, useEffect, useRef, useState} from "react";
 import {Form} from "react-router";
-import {z} from "zod";
 import {Icons} from "~/components/icons";
 import {PageWrapper} from "~/components/page-wrapper";
 import {H1, H2, H3, Lead, P} from "~/components/typography";
@@ -22,33 +21,21 @@ import {
 import {Input} from "~/components/ui/input";
 import {Label} from "~/components/ui/label";
 import {Textarea} from "~/components/ui/textarea";
+import {formSchema} from "~/lib/schemas";
 import {cn} from "~/lib/utils";
 import type {Route} from "./+types/about";
-
-let formSchema = z.object({
-	name: z.string().min(2, {message: "Name is required"}),
-	email: z.string().email({message: "Invalid email address"}),
-	subject: z.string().min(3, {message: "Subject is required"}),
-	message: z.string().min(10, {message: "Message is required"}),
-});
 
 export async function action({request}: Route.ActionArgs) {
 	let formData = await request.formData();
 	let form = Object.fromEntries(formData.entries());
-	console.log("form", form);
 	let result = formSchema.safeParse(form);
-	console.log("result", result);
 	if (!result.success) {
 		let errors = result.error.flatten().fieldErrors;
-
-		console.log("errors", errors, result.error);
 		return {
 			status: 400,
 			errors: errors,
 		};
 	}
-	// // Handle the form submission
-	// console.log("Form submitted successfully", result.data);
 	return {
 		status: 200,
 		message: "Form submitted successfully",
@@ -56,13 +43,10 @@ export async function action({request}: Route.ActionArgs) {
 }
 
 export default function AboutRoute({actionData}: Route.ComponentProps) {
-	console.log("actionData", actionData);
 	return (
 		<PageWrapper className="gap-30">
 			<Title />
-
 			<AboutCards />
-
 			<section className="mb-10 space-y-10">
 				<div className="flex flex-col items-center justify-center">
 					<H2>Success Stories</H2>
@@ -92,7 +76,7 @@ export default function AboutRoute({actionData}: Route.ComponentProps) {
 					<H3>Get In Touch</H3>
 					<Lead>Have questions or feedback? We'd love to hear from you.</Lead>
 				</div>
-				<ContactForm />
+				<ContactForm actionData={actionData} />
 			</section>
 		</PageWrapper>
 	);
@@ -291,15 +275,53 @@ export function AboutQuestions() {
 	);
 }
 
-function ContactForm() {
+function ContactForm({
+	actionData,
+}: {
+	actionData: Route.ComponentProps["actionData"];
+}) {
+	let [state, setState] = useState<"idle" | "success" | "error">("idle");
+	let formRef = useRef<HTMLFormElement | null>(null);
+
+	useEffect(() => {
+		let timeOutId: NodeJS.Timeout;
+
+		if (actionData?.status === 200) {
+			setState("success");
+			timeOutId = setTimeout(() => {
+				setState("idle");
+			}, 3000);
+		}
+		if (actionData?.status === 400) {
+			setState("error");
+			timeOutId = setTimeout(() => {
+				setState("idle");
+			}, 3000);
+		}
+		if (formRef.current) {
+			formRef.current.reset();
+		}
+		return () => {
+			if (timeOutId) {
+				clearTimeout(timeOutId);
+			}
+		};
+	}, [actionData]);
+
 	return (
-		<Card className="mt-5 w-full max-w-3xl">
+		<Card
+			className={cn(
+				"mt-5 w-full max-w-3xl border-2 transition-all duration-200",
+				state === "error" && "border-destructive shadow-2xl",
+				state === "success" && "border-green-500 shadow-2xl",
+			)}
+		>
 			<CardHeader>
 				<CardTitle className="flex items-center gap-2">
 					<Icons.Mail className="text-app" /> Contact Us
 				</CardTitle>
 			</CardHeader>
-			<Form method="post">
+			<Form method="post" ref={formRef}>
 				<fieldset className="space-y-6 p-5">
 					<div className="flex gap-10">
 						<div className="grid w-full items-center gap-1.5">
@@ -344,15 +366,27 @@ function ContactForm() {
 							required
 						/>
 					</div>
+					<div className="mt-5 flex min-h-12 w-full items-center justify-center">
+						{state === "error" && (
+							<P className="text-destructive">
+								{actionData?.errors?.message || "Something went wrong"}
+							</P>
+						)}
+						{state === "success" && (
+							<P className="text-green-500">
+								{actionData?.message || "Message sent successfully!"}
+							</P>
+						)}
+					</div>
+					<div className="flex justify-center">
+						<Button
+							type="submit"
+							className=" max-w-sm bg-app text-foreground hover:bg-app/80"
+						>
+							Send Message
+						</Button>
+					</div>
 				</fieldset>
-				<div className=" flex justify-center">
-					<Button
-						type="submit"
-						className=" max-w-sm bg-app text-foreground hover:bg-app/80"
-					>
-						Send Message
-					</Button>
-				</div>
 			</Form>
 		</Card>
 	);
