@@ -11,7 +11,7 @@ Application is ina **WIP** state, so please be patient with any bugs or issues y
 
 - User-friendly interface for inputting personal information
 - Calculates daily calorie intake based on user input
-- Displays macronutrient breakdown (carbohydrates, proteins, fats)
+- Displays macro nutrient breakdown (carbohydrates, proteins, fats)
 - Provides a summary of the results
 - Copy to clipboard functionality for easy sharing
 
@@ -24,3 +24,7 @@ Application is ina **WIP** state, so please be patient with any bugs or issues y
 - [Zod](https://zod.dev/)
 - [Motion](https://motion.dev/)
 - [Motion-Primitives](https://motion-primitives.com/docs)
+
+## view the app
+
+You can view the app [here](https://nutri-calc-eight.vercel.app)
