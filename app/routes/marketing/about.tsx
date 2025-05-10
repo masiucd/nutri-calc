@@ -21,8 +21,8 @@ import {
 import {Input} from "~/components/ui/input";
 import {Label} from "~/components/ui/label";
 import {Textarea} from "~/components/ui/textarea";
-import {formSchema} from "~/lib/schemas";
 import {cn} from "~/lib/utils";
+import {formSchema} from "~/server/schemas/about";
 import type {Route} from "./+types/about";
 
 export async function action({request}: Route.ActionArgs) {
@@ -123,85 +123,20 @@ function Title() {
 	);
 }
 
-const AboutCardIconsSize = 30;
-const iconStyles = "text-app";
 function AboutCards() {
 	return (
 		<section className="mb-10 grid grid-cols-4 grid-rows-4 gap-5">
-			<AboutCard
-				title="Our Mission"
-				className="col-span-2 row-span-2"
-				icon={
-					<Icons.BarChart size={AboutCardIconsSize} className={iconStyles} />
-				}
-			>
-				<P>
-					CalorieTrack was created with a simple yet powerful mission: to help
-					people make informed nutritional choices through accurate,
-					science-based calorie tracking.
-				</P>
-				<P>
-					We believe that understanding energy balance is the foundation for
-					sustainable health and fitness goals. Our calculator provides
-					personalized recommendations based on your unique profile and
-					objectives.
-				</P>
-			</AboutCard>
-
-			<AboutCard
-				title="The Science"
-				className="col-span-2 row-span-2"
-				icon={
-					<Icons.Calculator size={AboutCardIconsSize} className={iconStyles} />
-				}
-			>
-				<P>
-					Our calorie calculator uses the Mifflin-St Jeor equation, widely
-					recognized as the most accurate formula for estimating Basal Metabolic
-					Rate (BMR).
-				</P>
-				<P>
-					We then apply activity multipliers based on your lifestyle to
-					determine your Total Daily Energy Expenditure (TDEE). This gives you a
-					precise starting point for your nutritional planning, whether your
-					goal is weight loss, maintenance, or muscle gain.
-				</P>
-			</AboutCard>
-			<AboutCard
-				title="The Team"
-				className="col-span-2 row-span-2"
-				icon={<Icons.Users size={AboutCardIconsSize} className={iconStyles} />}
-			>
-				<P>
-					CalorieTrack was developed by a dedicated team of nutritionists,
-					fitness experts, and software engineers passionate about improving
-					public health through technology.
-				</P>
-				<P>
-					Our multidisciplinary approach ensures that the calculator is not only
-					technically robust but also practical and easy to use in everyday
-					life. We continuously update our formulas based on the latest
-					nutritional research.
-				</P>
-			</AboutCard>
-			<AboutCard
-				title="Privacy & Data"
-				className="col-span-2 row-span-2"
-				icon={
-					<Icons.ShieldCheck size={AboutCardIconsSize} className={iconStyles} />
-				}
-			>
-				<P>
-					We take your privacy seriously. CalorieTrack is designed with a
-					privay-first approach — your personal data is never sold, shared, or
-					used for advertising purposes.
-				</P>
-				<P>
-					All calculations can be performed locally on your device, and you
-					choose what data to save. We employ industry-standard encryption for
-					any information you opt to store in your account.
-				</P>
-			</AboutCard>
+			{aboutContent.map((item) => (
+				<AboutCard
+					key={item.title}
+					title={item.title}
+					className="col-span-2 row-span-2"
+					icon={item.icon}
+				>
+					<P>{item.descriptionOne}</P>
+					<P>{item.descriptionTwo}</P>
+				</AboutCard>
+			))}
 		</section>
 	);
 }
@@ -228,39 +163,6 @@ function AboutCard({
 		</Card>
 	);
 }
-
-const accordionItems = [
-	{
-		title: "How accurate is calorie counting for weight loss?",
-		content:
-			"Calorie counting is a useful tool for weight loss, but it's not the only factor. It provides a good estimate of your energy needs, but individual variations in metabolism, activity level, and food choices can affect results.",
-		value: "item-1",
-	},
-
-	{
-		title: "How does the calorie calculator determine my daily needs?",
-		content: `The calculator uses the Mifflin-St Jeor equation to estimate your
-					Basal Metabolic Rate (BMR) based on your personal information
-					(age,sex, weight, height) and then applies an activity multiplier to
-					determine your Total Daily Energy Expenditure (TDEE). Your TDEE is the
-					number of calories you need to maintain your current weight, and you
-					can adjust your intake based on your goals (e.g., weight loss,
-					maintenance, or muscle gain).`,
-		value: "item-2",
-	},
-	{
-		title: "Should I count calories from beverages too?",
-		content:
-			"Yes, it's important to include calories from beverages in your daily intake. Many drinks, especially sugary ones, can contribute a significant number of calories without providing much nutritional value. Be sure to account for all sources of calories to get an accurate picture of your daily intake.",
-		value: "item-3",
-	},
-	{
-		title: "How often should I recalculate my calorie needs?",
-		content:
-			"You should recalculate your calorie needs whenever you experience significant changes in your weight, activity level, or body composition. It's also a good idea to reassess your needs every few months to ensure you are on track with your goals. Regularly updating your calorie needs can help you adjust your intake and maintain progress.",
-		value: "item-4",
-	},
-] as const;
 
 export function AboutQuestions() {
 	return (
@@ -397,3 +299,75 @@ function useActionDataState(
 		};
 	}, [actionData, formRef.current, setState]);
 }
+
+const AboutCardIconsSize = 30;
+const iconStyles = "text-app";
+let aboutContent = [
+	{
+		title: "Our Mission",
+		descriptionOne:
+			"CalorieTrack was created with a simple yet powerful mission: to help people make informed nutritional choices through accurate, science-based calorie tracking.",
+		descriptionTwo:
+			"We believe that understanding energy balance is the foundation for sustainable health and fitness goals. Our calculator provides personalized recommendations based on your unique profile and objectives.",
+		icon: <Icons.BarChart size={AboutCardIconsSize} className={iconStyles} />,
+	},
+	{
+		title: "The Science",
+		descriptionOne:
+			"Our calorie calculator uses the Mifflin-St Jeor equation, widely recognized as the most accurate formula for estimating Basal Metabolic Rate (BMR).",
+		descriptionTwo:
+			"We then apply activity multipliers based on your lifestyle to determine your Total Daily Energy Expenditure (TDEE). This gives you a precise starting point for your nutritional planning, whether your goal is weight loss, maintenance, or muscle gain.",
+		icon: <Icons.Calculator size={AboutCardIconsSize} className={iconStyles} />,
+	},
+	{
+		title: "The Team",
+		descriptionOne:
+			"CalorieTrack was developed by a dedicated team of nutritionists, fitness experts, and software engineers passionate about improving public health through technology.",
+		descriptionTwo:
+			"Our multidisciplinary approach ensures that the calculator is not only technically robust but also practical and easy to use in everyday life. We continuously update our formulas based on the latest nutritional research.",
+		icon: <Icons.Users size={AboutCardIconsSize} className={iconStyles} />,
+	},
+	{
+		title: "Privacy & Data",
+		descriptionOne:
+			"We take your privacy seriously. CalorieTrack is designed with a privay-first approach — your personal data is never sold, shared, or used for advertising purposes.",
+		descriptionTwo:
+			"All calculations can be performed locally on your device, and you choose what data to save. We employ industry-standard encryption for any information you opt to store in your account.",
+		icon: (
+			<Icons.ShieldCheck size={AboutCardIconsSize} className={iconStyles} />
+		),
+	},
+] as const;
+
+const accordionItems = [
+	{
+		title: "How accurate is calorie counting for weight loss?",
+		content:
+			"Calorie counting is a useful tool for weight loss, but it's not the only factor. It provides a good estimate of your energy needs, but individual variations in metabolism, activity level, and food choices can affect results.",
+		value: "item-1",
+	},
+
+	{
+		title: "How does the calorie calculator determine my daily needs?",
+		content: `The calculator uses the Mifflin-St Jeor equation to estimate your
+					Basal Metabolic Rate (BMR) based on your personal information
+					(age,sex, weight, height) and then applies an activity multiplier to
+					determine your Total Daily Energy Expenditure (TDEE). Your TDEE is the
+					number of calories you need to maintain your current weight, and you
+					can adjust your intake based on your goals (e.g., weight loss,
+					maintenance, or muscle gain).`,
+		value: "item-2",
+	},
+	{
+		title: "Should I count calories from beverages too?",
+		content:
+			"Yes, it's important to include calories from beverages in your daily intake. Many drinks, especially sugary ones, can contribute a significant number of calories without providing much nutritional value. Be sure to account for all sources of calories to get an accurate picture of your daily intake.",
+		value: "item-3",
+	},
+	{
+		title: "How often should I recalculate my calorie needs?",
+		content:
+			"You should recalculate your calorie needs whenever you experience significant changes in your weight, activity level, or body composition. It's also a good idea to reassess your needs every few months to ensure you are on track with your goals. Regularly updating your calorie needs can help you adjust your intake and maintain progress.",
+		value: "item-4",
+	},
+] as const;
