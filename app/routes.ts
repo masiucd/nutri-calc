@@ -16,5 +16,4 @@ export default [
 			index("routes/applications/index.tsx"),
 		]),
 	]),
-	// route("/calculate", "routes/calculate.tsx"),
 ] satisfies RouteConfig;

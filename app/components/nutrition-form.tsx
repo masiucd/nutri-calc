@@ -17,6 +17,8 @@ import {
 import {cn} from "~/lib/utils";
 import {Separator} from "./ui/separator";
 
+const iconStyles = "text-app";
+
 export function NutritionForm() {
 	let navigation = useNavigation();
 	let isPending = navigation.formAction === "/calculate";
@@ -31,7 +33,7 @@ export function NutritionForm() {
 			>
 				<div className="flex flex-col">
 					<span className="mb-3 flex gap-1">
-						<UserIcon className="text-foreground-500" /> Fitness Profile
+						<UserIcon className={iconStyles} /> Fitness Profile
 					</span>
 					<div className="grid grid-cols-4 grid-rows-4 gap-4">
 						<GenderOptions />
@@ -43,12 +45,12 @@ export function NutritionForm() {
 				<Separator className="mb-5" />
 				<div className="flex flex-col">
 					<span className="mb-3 flex gap-1">
-						<ActivityIcon className="text-foreground-500" /> Activity & Goals
+						<ActivityIcon className={iconStyles} /> Activity & Goals
 					</span>
 					<ActivityLevel />
 					<FitnessGoal />
 				</div>
-				<Button type="submit">
+				<Button type="submit" variant="form">
 					{isPending ? "calculating..." : "Calculate Nutrition"}
 				</Button>
 			</fieldset>
