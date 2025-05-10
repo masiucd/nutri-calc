@@ -282,31 +282,7 @@ function ContactForm({
 }) {
 	let [state, setState] = useState<"idle" | "success" | "error">("idle");
 	let formRef = useRef<HTMLFormElement | null>(null);
-
-	useEffect(() => {
-		let timeOutId: NodeJS.Timeout;
-
-		if (actionData?.status === 200) {
-			setState("success");
-			timeOutId = setTimeout(() => {
-				setState("idle");
-			}, 3000);
-		}
-		if (actionData?.status === 400) {
-			setState("error");
-			timeOutId = setTimeout(() => {
-				setState("idle");
-			}, 3000);
-		}
-		if (formRef.current) {
-			formRef.current.reset();
-		}
-		return () => {
-			if (timeOutId) {
-				clearTimeout(timeOutId);
-			}
-		};
-	}, [actionData]);
+	useActionDataState(actionData, formRef, setState);
 
 	return (
 		<Card
@@ -390,4 +366,34 @@ function ContactForm({
 			</Form>
 		</Card>
 	);
+}
+
+function useActionDataState(
+	actionData: Route.ComponentProps["actionData"],
+	formRef: React.RefObject<HTMLFormElement | null>,
+	setState: React.Dispatch<React.SetStateAction<"idle" | "success" | "error">>,
+) {
+	useEffect(() => {
+		let timeOutId: NodeJS.Timeout;
+		if (actionData?.status === 200) {
+			setState("success");
+			timeOutId = setTimeout(() => {
+				setState("idle");
+			}, 3000);
+		}
+		if (actionData?.status === 400) {
+			setState("error");
+			timeOutId = setTimeout(() => {
+				setState("idle");
+			}, 3000);
+		}
+		if (formRef.current) {
+			formRef.current.reset();
+		}
+		return () => {
+			if (timeOutId) {
+				clearTimeout(timeOutId);
+			}
+		};
+	}, [actionData, formRef.current, setState]);
 }
