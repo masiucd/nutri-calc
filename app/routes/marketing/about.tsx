@@ -279,6 +279,9 @@ function useActionDataState(
 		let timeOutId: NodeJS.Timeout;
 		if (actionData?.status === 200) {
 			setState("success");
+			if (formRef.current) {
+				formRef.current.reset();
+			}
 			timeOutId = setTimeout(() => {
 				setState("idle");
 			}, 3000);
@@ -289,9 +292,7 @@ function useActionDataState(
 				setState("idle");
 			}, 3000);
 		}
-		if (formRef.current) {
-			formRef.current.reset();
-		}
+
 		return () => {
 			if (timeOutId) {
 				clearTimeout(timeOutId);
